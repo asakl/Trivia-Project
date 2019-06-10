@@ -1,0 +1,5 @@
+﻿  JsonResponsePacketSerializer.cpp
+C:\GoogleDrive\Magshimim\cpp\15\trivia\Trivia\Trivia-Project\Server\Trivia\JsonResponsePacketSerializer.h(36,2): warning C4091:  'static ': ignored on left of 'JsonResponsePacketSerializer' when no variable is declared
+C:\GoogleDrive\Magshimim\cpp\15\trivia\Trivia\Trivia-Project\Server\Trivia\JsonResponsePacketSerializer.cpp(52,24): warning C4267:  '=': conversion from 'size_t' to 'char', possible loss of data
+C:\GoogleDrive\Magshimim\cpp\15\trivia\Trivia\Trivia-Project\Server\Trivia\JsonResponsePacketSerializer.cpp(183,41): warning C4267:  '=': conversion from 'size_t' to 'unsigned int', possible loss of data
+  Trivia.vcxproj -> C:\GoogleDrive\Magshimim\cpp\15\trivia\Trivia\Trivia-Project\Server\x64\Debug\Trivia.exe
