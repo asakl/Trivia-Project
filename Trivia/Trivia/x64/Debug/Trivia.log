@@ -1,0 +1,11 @@
+﻿  Communicator.cpp
+C:\GoogleDrive\Magshimim\cpp\15\trivia\Trivia\Trivia\JsonRequestPacketDeserializer.h(21,2): warning C4091:  'static ': ignored on left of 'JsonRequestPacketDeserializer' when no variable is declared
+  JsonResponsePacketSerializer.cpp
+C:\GoogleDrive\Magshimim\cpp\15\trivia\Trivia\Trivia\JsonResponsePacketSerializer.h(36,2): warning C4091:  'static ': ignored on left of 'JsonResponsePacketSerializer' when no variable is declared
+C:\GoogleDrive\Magshimim\cpp\15\trivia\Trivia\Trivia\JsonResponsePacketSerializer.h(36,2): warning C4091:  'static ': ignored on left of 'JsonResponsePacketSerializer' when no variable is declared
+  RoomAdminRequestHandler.cpp
+C:\GoogleDrive\Magshimim\cpp\15\trivia\Trivia\Trivia\JsonResponsePacketSerializer.cpp(170,41): warning C4267:  '=': conversion from 'size_t' to 'unsigned int', possible loss of data
+C:\GoogleDrive\Magshimim\cpp\15\trivia\Trivia\Trivia\JsonRequestPacketDeserializer.h(21,2): warning C4091:  'static ': ignored on left of 'JsonRequestPacketDeserializer' when no variable is declared
+  Generating Code...
+C:\GoogleDrive\Magshimim\cpp\15\trivia\Trivia\Trivia\JsonResponsePacketSerializer.h(36,2): warning C4091:  'static ': ignored on left of 'JsonResponsePacketSerializer' when no variable is declared
+  Trivia.vcxproj -> C:\GoogleDrive\Magshimim\cpp\15\trivia\Trivia\x64\Debug\Trivia.exe
