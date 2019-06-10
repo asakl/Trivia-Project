@@ -17,7 +17,8 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(ErrorResponse resp
 	j[MESSAGE] = response.message;
 
 	buffer = Helper::toBytes(j.dump());
-	
+	buffer = Helper::msgToProtocol(buffer, ERROR_ID);
+
 	return buffer;
 }
 
@@ -35,22 +36,13 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(LoginResponse resp
 	
 	
 	buffer.push_back(Byte((unsigned long long)asBits));
-
 	
 	//adds the data to the json object.
 	j[STATUS] = to_string(TRIVIA_OK);
 	buffer.push_back(Byte((unsigned long long)asBits));
 	buffer = Helper::toBytes(j.dump());
 	
-	auto it = buffer.begin();
-
-	//Adds the status to the buffer
-	asBits = LOGIN_REQUEST_ID;
-	buffer.insert(it,asBits, 1);
-	//Add the length to the buffer.
-	it = buffer.begin();
-	asBits = buffer.size();
-	buffer.insert(it + 1, asBits, 1);
+	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
 	
 	return buffer;
 }
@@ -72,6 +64,7 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(SignupResponse res
 	j[STATUS] = to_string(ERROR_RESPONSE_ID);
 
 	buffer = Helper::toBytes(j.dump());
+	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
 
 	return buffer;
 }
@@ -87,8 +80,8 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(LogoutResponse res
 	//adds the data to the json object.
 	j[STATUS] = to_string(response.status);
 	
-	
 	buffer = Helper::toBytes(j.dump());
+	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
 
 	return buffer;
 }
@@ -108,6 +101,7 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(GetRoomsResponse r
 
 
 	buffer = Helper::toBytes(j.dump());
+	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
 
 	return buffer;
 }
@@ -121,6 +115,7 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(JoinRoomResponse r
 	j[STATUS] = to_string(response.status);
 
 	buffer = Helper::toBytes(j.dump());
+	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
 
 	return buffer;
 }
@@ -133,8 +128,7 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(CreateRoomResponse
 	j[STATUS] = to_string(response.status);
 
 	buffer = Helper::toBytes(j.dump());
-
-
+	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
 
 	return buffer;
 }
@@ -150,6 +144,7 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(HighscoreResponse 
 	j[HIGHSCORES] = Helper::vectorToJson(response.highscores).dump();
 
 	buffer = Helper::toBytes(j.dump());
+	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
 
 	return buffer;
 }
@@ -166,7 +161,7 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(GetPlayersInRoomRe
 	j[PLAYERS] = Helper::vectorToJson(response.players).dump();
 
 	buffer = Helper::toBytes(j.dump());
-
+	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
 
 	return buffer;
 }
@@ -179,6 +174,7 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(CloseRoomResponse 
 	j[STATUS] = to_string(response.status);
 
 	buffer = Helper::toBytes(j.dump());
+	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
 
 	response.responseLength = buffer.size();
 
@@ -193,7 +189,7 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(StartGameResponse 
 	j[STATUS] = to_string(response.status);
 
 	buffer = Helper::toBytes(j.dump());
-
+	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
 
 	return buffer;
 }
@@ -203,8 +199,6 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(GetRoomStateRespon
 	vector<Byte> buffer;
 	json j;
 
-
-
 	j[STATUS] = to_string(response.status);
 	j[ANSWER_TIMEOUT] = to_string(response.answerTimeout);
 	j[HAS_GAME_BEGUN] = to_string(response.hasGameBegun);
@@ -212,6 +206,7 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(GetRoomStateRespon
 	j[ANSWER_COUNT] = to_string(response.questionCount);
 
 	buffer = Helper::toBytes(j.dump());
+	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
 
 	return buffer;
 }
@@ -224,6 +219,7 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(LeaveRoomResponse 
 	j[STATUS] = to_string(response.status);
 
 	buffer = Helper::toBytes(j.dump());
+	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
 
 	return buffer;
 }

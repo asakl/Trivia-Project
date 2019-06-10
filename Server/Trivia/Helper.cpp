@@ -167,6 +167,30 @@ char* Helper::serializeFirstResponse(unsigned int status, unsigned int length)
 	return (char*)msg.c_str();
 }
 
+vector<Byte> Helper::msgToProtocol(vector<Byte> json, int code)
+{
+	vector<Byte> vec;
+	int size = json.size();
+	
+	Byte codeByte(code);
+	int num = 0xff000000;
+
+	vec.push_back(codeByte);
+
+	for (int i = 0; i < 4; i++)
+	{
+		vec.push_back(num & size);
+		num = num >> 8;
+	}
+
+	for (auto i : json)
+	{
+		vec.push_back(i);
+	}
+
+	return vec;
+}
+
 //The function vectorToJson gets a vector of type RoomData, and returns a json object.
 //Input: Vector of RoomData. 
 //Output: A json object. json[0] is vector[0], and json[1] is vector[1], and so on.

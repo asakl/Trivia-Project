@@ -33,6 +33,8 @@ public:
 
 	static string toString(vector<Byte>);
 	static char* serializeFirstResponse(unsigned int status, unsigned int length);
+	static vector<Byte> msgToProtocol(vector<Byte> json, int code);
+
 
 	static nlohmann::json vectorToJson(const vector<RoomData> vec);
 	static nlohmann::json vectorToJson(const vector<string> vec);
