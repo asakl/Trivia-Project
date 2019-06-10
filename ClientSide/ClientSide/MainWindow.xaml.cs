@@ -43,6 +43,9 @@ namespace ClientSide
                 errorWindow.Show();
             }
 
+            this.UsernameText.Text = "asa";
+            this.PasswordText.Password = "asa1";
+
             // there is logged user?
             if (Helper.Username != "")
             {
@@ -107,7 +110,7 @@ namespace ClientSide
                 KeyValuePair<int, string> msg = Communicator.GetMsg();
                 
                 // the user is valid
-                if ((msg.Key) == '1')
+                if ((msg.Key) == 0)
                 {
                     // log user
                     Helper.Username = json["username"];

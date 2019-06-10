@@ -35,6 +35,7 @@ namespace ClientSide
         {
             MainWindow mainWindow = new MainWindow();
             this.Close();
+            mainWindow.Show();
         }
 
         //if user click the 'ok' button
@@ -64,7 +65,7 @@ namespace ClientSide
                 KeyValuePair<int, string> pair = Communicator.GetMsg();
 
                 //valid request
-                if (pair.Key == '2')
+                if (pair.Key == 0)
                 {
                     ReturnFunc();
                 }
@@ -82,20 +83,6 @@ namespace ClientSide
         {
             //return to main window
             ReturnFunc();
-        }
-
-        //the user click 'close'
-        private void Window_Closing(object sender, CancelEventArgs e)
-        {
-            //stop the default closing
-            e.Cancel = true;
-
-            //return to main window
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-
-            //close curr window
-            e.Cancel = false;
         }
     }
 }

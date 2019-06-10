@@ -58,7 +58,7 @@ namespace ClientSide
 
             // get size
             IEnumerable<byte> a = buffer.Take(5).Reverse().Take(4);
-            byte[] arr = a.Reverse().ToArray();
+            byte[] arr = a.ToArray();
             uint size = BitConverter.ToUInt32(arr, 0);
 
             // decode

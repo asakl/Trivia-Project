@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media.Animation;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -38,10 +39,19 @@ namespace ClientSide
 
             // send msg
             Communicator.SendMsg(arr, arr.Length);
-            
-            
+            KeyValuePair<int, string> msg = Communicator.GetMsg();
+
+            var mainResJson = JsonConvert.DeserializeObject<Dictionary<string, string>>(msg.Value);
+            var roomResJson = JsonConvert.DeserializeObject<Dictionary<string, string>>(mainResJson["rooms"]);
+
+            if (roomResJson == null)
+            {
+                this.ErrorLabel.Visibility = Visibility.Visible;
+                Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
+                sb.Begin(ErrorLabel);
+            }
+
             //string msg = Communicator.GetMsgString();
-            //var rootObject = JsonConvert.DeserializeObject<Dictionary<string, string>>(msg);
 
             //foreach (var i in rootObject["rooms"])
             //{

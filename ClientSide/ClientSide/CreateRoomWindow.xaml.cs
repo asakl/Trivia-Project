@@ -24,6 +24,11 @@ namespace ClientSide
         public CreateRoomWindow()
         {
             InitializeComponent();
+
+            this.RoomsInput.Text = "room_name";
+            this.TimeInput.Text = "5";
+            this.NumPlayersInput.Text = "2";
+            this.NumQuestionsInput.Text = "5";
         }
 
         /// <summary>
@@ -100,7 +105,12 @@ namespace ClientSide
                 // send and get res
                 Communicator.SendMsg(arr, arr.Length);
                 KeyValuePair<int, string> msg = Communicator.GetMsg();
-                int i = 0;
+
+                Dictionary<string, uint> resJson = JsonConvert.DeserializeObject<Dictionary<string, uint>>(msg.Value);
+                
+
+
+
             }
             // invalid input
             else
