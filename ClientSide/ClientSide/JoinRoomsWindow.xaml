@@ -1,0 +1,28 @@
+﻿<Window x:Class="ClientSide.JoinRoomsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClientSide"
+        mc:Ignorable="d"
+        Title="JoinRoomsWindow" Height="600" Width="500" Background="DarkGreen">
+    <Grid>
+        <Border Background="DimGray" Margin="40,30,40,40" CornerRadius="40">
+            <StackPanel VerticalAlignment="Center">
+                <StackPanel>
+                    <Label Name="Rooms_Label" Content="List Of Rooms" HorizontalAlignment="Center" FontSize="30" Foreground="White" FontWeight="Bold"></Label>
+                    <Label Content="Select Room:" HorizontalAlignment="Center" Foreground="White" FontSize="20" FontWeight="DemiBold"></Label>
+                    <ListBox Name="RoomsList" Height="30" HorizontalContentAlignment="Center" Width="300" SelectionChanged="RoomsList_SelectionChanged"></ListBox>
+                    <Label Content="Players In Room:" HorizontalAlignment="Center" Foreground="White" FontSize="20" FontWeight="DemiBold"></Label>
+                    <ListBox Name="PlayerList" Height="30" HorizontalContentAlignment="Center" Width="300"></ListBox>
+                </StackPanel>
+                <StackPanel Margin="40">
+                    <Button Name="Refresh_Button" Content="Refresh" Width="250" Height="40" Margin="5" Click="Refresh_Button_Click" FontSize="20" FontWeight="DemiBold"></Button>
+                    <Button Name="Join_Button" Content="Join" Width="250" Height="40" Margin="5" FontSize="20" FontWeight="DemiBold"></Button>
+                    <Button Name="BackButton" Content="Back" Width="250" Height="40" Margin="5" Click="BackButton_Click" FontSize="20" FontWeight="DemiBold"></Button>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <Label Name="User_Label"  Height="100" Width="300" FontSize="30" FontWeight="Bold" Margin="104,164,89.6,406.4" HorizontalAlignment="Center" Visibility="Hidden"></Label>
+    </Grid>
+</Window>
