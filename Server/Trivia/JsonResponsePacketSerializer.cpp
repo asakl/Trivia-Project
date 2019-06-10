@@ -61,7 +61,7 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(SignupResponse res
 
 
 	//adds the data to the json object.
-	j[STATUS] = to_string(ERROR_RESPONSE_ID);
+	j[STATUS] = "valid signup";
 
 	buffer = Helper::toBytes(j.dump());
 	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);

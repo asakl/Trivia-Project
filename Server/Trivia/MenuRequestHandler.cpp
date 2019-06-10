@@ -90,14 +90,10 @@ RequestResult MenuRequestHandler::createRoom(Request r)
 	
 	//creates the room.
 	this->m_roomManager.createRoom(metadata, this->m_user);
-
-
 	
-	resp.status = TRIVIA_OK;
+	resp.status = metadata.id;
 	result.response = JsonResponsePacketSerializer::serializerResponse(resp);
 	result.newHandler = nullptr; //What should I do?
-
-
 
 	return result;
 }

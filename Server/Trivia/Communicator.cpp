@@ -177,7 +177,7 @@ void Communicator::handleRequests(SOCKET client_socket)
 		try
 		{
 			//Send the message length and code
-			Helper::sendData(client_socket, res.msg);
+			//Helper::sendData(client_socket, res.msg);
 			//sending data to client.
 			Helper::sendData(client_socket, Helper::toString(res.response));
 		}

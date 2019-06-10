@@ -64,7 +64,6 @@ typedef struct JoinRoomResponse
 typedef struct CreateRoomResponse
 {
 	unsigned int status;
-	unsigned int responseLength;
 }CreateRoomResponse;
 
 
