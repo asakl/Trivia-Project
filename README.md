@@ -1,4 +1,4 @@
 # Trivia-Project
 Magshimim Trivia Project
-this is the client side, written with c#
+this is the server side, written with c++
 enjoy!
