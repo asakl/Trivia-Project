@@ -27,3 +27,5 @@ C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\ClientSide\ClientS
 C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\ClientSide\ClientSide\obj\Debug\HighscoresWindow.baml
 C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\ClientSide\ClientSide\obj\Debug\ConnectionErrorWindow.g.cs
 C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\ClientSide\ClientSide\obj\Debug\ConnectionErrorWindow.baml
+C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\ClientSide\ClientSide\obj\Debug\RoomDataWinow.g.cs
+C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\ClientSide\ClientSide\obj\Debug\RoomDataWinow.baml

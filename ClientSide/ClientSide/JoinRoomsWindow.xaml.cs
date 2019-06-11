@@ -51,6 +51,10 @@ namespace ClientSide
                 sb.Begin(ErrorLabel);
             }
 
+            PlayerList.Items.Add("asa1");
+            PlayerList.Items.Add("asa2");
+            PlayerList.Items.Add("asa3");
+            PlayerList.Items.Add("asa4");
             //string msg = Communicator.GetMsgString();
 
             //foreach (var i in rootObject["rooms"])

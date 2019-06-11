@@ -107,10 +107,14 @@ namespace ClientSide
                 KeyValuePair<int, string> msg = Communicator.GetMsg();
 
                 Dictionary<string, uint> resJson = JsonConvert.DeserializeObject<Dictionary<string, uint>>(msg.Value);
-                
+                int i = 0;
 
+                User.Is_admin = true;
+                User.initRoom(json1["roomName"], resJson["roomId"], (uint)json2["maxUsers"], (uint)json2["questionCount"], (uint)json2["answerTimeout"]);
 
-
+                RoomDataWinow roomDataWinow = new RoomDataWinow();
+                Close();
+                roomDataWinow.Show();
             }
             // invalid input
             else

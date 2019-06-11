@@ -71,9 +71,13 @@
     <Compile Include="MyStatusWindow.xaml.cs">
       <DependentUpon>MyStatusWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RoomDataWinow.xaml.cs">
+      <DependentUpon>RoomDataWinow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SignupWindow.xaml.cs">
       <DependentUpon>SignupWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="User.cs" />
     <Page Include="ConnectionErrorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -104,6 +108,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MyStatusWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RoomDataWinow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

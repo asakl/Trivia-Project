@@ -47,7 +47,7 @@ namespace ClientSide
             this.PasswordText.Password = "asa1";
 
             // there is logged user?
-            if (Helper.Username != "")
+            if (User.Username != "")
             {
                 LoggedUser();
             }
@@ -61,7 +61,7 @@ namespace ClientSide
             // change all the UI
             LoginGrid.Visibility = Visibility.Hidden;
             Logout_Button.Visibility = Visibility.Visible;
-            User_Label.Content = "Welcome " + Helper.Username + "!";
+            User_Label.Content = "Welcome " + User.Username + "!";
             User_Label.Visibility = Visibility.Visible;
             Join_Button.IsEnabled = true;
             Create_Button.IsEnabled = true;
@@ -113,7 +113,7 @@ namespace ClientSide
                 if ((msg.Key) == 0)
                 {
                     // log user
-                    Helper.Username = json["username"];
+                    User.Username = json["username"];
                     LoggedUser();
                 }
                 else
@@ -173,7 +173,7 @@ namespace ClientSide
             Create_Button.IsEnabled = false;
             Status_Button.IsEnabled = false;
             Best_Button.IsEnabled = false;
-            Helper.Username = "";
+            User.Username = "";
 
             // reconnect server
             Communicator.Connect();
@@ -200,7 +200,7 @@ namespace ClientSide
         private void Status_Button_Click(object sender, RoutedEventArgs e)
         {
             // open status window and close this
-            MyStatusWindow myStatusWindow = new MyStatusWindow(Helper.Username);
+            MyStatusWindow myStatusWindow = new MyStatusWindow(User.Username);
             Close();
             myStatusWindow.Show();
         }

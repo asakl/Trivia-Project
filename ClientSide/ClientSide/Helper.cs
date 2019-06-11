@@ -11,9 +11,6 @@ namespace ClientSide
     /// </summary>
     class Helper
     {
-        // username of the user
-        static public string Username = "";
-
         /// <summary>
         /// the func make byte array from json string and msg code
         /// </summary>
