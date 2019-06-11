@@ -1,0 +1,85 @@
+#include "RoomManager.h"
+
+
+
+//The functions createRoom adds a room to m_rooms.
+//Input: LoggedUser to add to the room.
+//Output: The created room id.
+unsigned int RoomManager::createRoom(RoomData metadata,LoggedUser user)
+{
+	metadata.id = this->nextID;
+
+	//create a new room
+	Room newRoom(metadata);
+	newRoom.addUser(user);
+
+	//add the room to the room map
+	this->m_rooms[this->nextID] = newRoom;
+
+	//set the next id.
+	this->nextID++;
+
+	return metadata.id;
+}
+
+//the function delete room remove a room from the room map.
+//Input: id of the room to be deleted.
+//Output: None.
+void RoomManager::deleteRoom(unsigned int id)
+{
+	for (auto it = this->m_rooms.begin(); it != this->m_rooms.end(); it++)
+	{
+		if (it->first == id)
+		{
+			this->m_rooms.erase(it);
+			return;
+		}
+	}
+}
+
+//The function addUser adds the user to a room with the given id.
+//Input: A user to add, and an id of the room.
+//Output: true if succeeded to add the user,false overwise.
+bool RoomManager::addUserToRoom(LoggedUser user, unsigned int id)
+{
+	bool succeeded = false;
+
+	//Try to add the user
+	succeeded = this->m_rooms[id].addUser(user);
+
+	return succeeded;
+}
+
+//the function getRoomState return the state of the room with the given ID.
+//Input: The ID of the room.
+//Output: The room's state.
+unsigned int RoomManager::getRoomState(unsigned int id)
+{
+	return this->m_rooms[id].getRoomData().isActive;
+}
+
+
+//The function getRooms returns the metadata of all the rooms in m_rooms.
+//Input: None.
+//Output: vector of RoomData, which contains the metadata of all the rooms in m_rooms.  
+vector<RoomData> RoomManager::getRoomsData()
+{
+	//the returned vector
+	vector<RoomData> rooms;
+
+	//go over the map with iterators.
+	for (auto it = this->m_rooms.begin();it != this->m_rooms.end();it++)
+	{
+		rooms.push_back(it->second.getRoomData());
+	}
+
+	return rooms;
+}
+
+//The function getRoom gets an id, and returns the room with that id.
+//Input: And id (int)
+//Output: A room with the id.
+const Room RoomManager::getRoom(unsigned int id)
+{
+	return this->m_rooms[id];
+}
