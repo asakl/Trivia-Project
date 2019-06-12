@@ -6,12 +6,17 @@ using std::string;
 
 class LoggedUser
 {
-	string m_username;
 
 public:
 	LoggedUser(string name = "unknown");
 	string getUsername();
+	
+
+	bool operator==(LoggedUser other);
 
 	~LoggedUser();
+private:
+	string m_username;
+
 };
 

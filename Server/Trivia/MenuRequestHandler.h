@@ -15,7 +15,7 @@ class MenuRequestHandler : public IRequestHandler
 {
 public:
 	MenuRequestHandler();
-	MenuRequestHandler(RoomManager);
+	MenuRequestHandler(RoomManager*);
 	
 
 	bool isRequestRelevant(Request  r);
@@ -26,7 +26,7 @@ public:
 
 private:
 	LoggedUser m_user;
-	RoomManager m_roomManager;
+	RoomManager* m_roomManager;
 	HighscoreTable m_highscoreTable;
 	RequestHandlerFactory* m_requestHandlerFactory;
 

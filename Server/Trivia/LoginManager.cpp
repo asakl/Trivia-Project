@@ -1,8 +1,8 @@
 #include "LoginManager.h"
 
-/*
-i dont think comments are necessary
-*/
+//Declare the static members. The declaretion in the header isnt sufficient enough
+mutex LoginManager::signupLock;
+mutex LoginManager::loggedUsersLock;
 
 //setter
 void LoginManager::setDatabase(IDatabase * db)
@@ -29,7 +29,16 @@ LoginManager::~LoginManager()
 //signup
 void LoginManager::signup(string name, string pass, string email)
 {
+	
+	LoginManager::signupLock.lock(); //Prevent other threads from signing up.
+
 	this->m_database->signup(name, pass, email);
+	
+	LoginManager::signupLock.unlock();
+
+
+
+	//Since login doesnt change the database, just reading from it, no lock is needed.
 	this->login(name, pass);
 }
 
@@ -44,10 +53,31 @@ void LoginManager::login(string name, string pass)
 	this->m_loggedUsers.push_back(*user);
 }
 
-//logout
-void LoginManager::logout()
+//The function LoginManager::logout gets a LoggedUser and deletes it from the vector of logged users.
+//Input: A user to delete.
+//Output: true if the user was deleted successfully, false if not.
+bool LoginManager::logout(LoggedUser user)
 {
-	// TODO
+	auto index = std::find(this->m_loggedUsers.begin(), this->m_loggedUsers.end(), user);
+
+	//std::find return iterator to the end of the contanair given, if the given item to find was not found.
+	if (index != this->m_loggedUsers.end())
+	{
+		//Prevent access for other threads using this vector.
+		LoginManager::loggedUsersLock.lock(); 
+
+
+		//Since index is not the end of the contanair, index can be erased safely.
+		this->m_loggedUsers.erase(index);
+		
+		//Done messing with the vector.
+		LoginManager::loggedUsersLock.unlock();
+		
+		return true; //The user was found and deleted successfully.
+	}
+
+	//the user doesnt exist.
+	return false;
 }
 
 //check if user exist

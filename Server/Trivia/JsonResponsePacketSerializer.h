@@ -15,6 +15,8 @@ using nlohmann::json;
 #define HAS_GAME_BEGUN "hasGameBegun"
 #define ANSWER_COUNT "answerCount"
 #define MESSAGE "message"
+#define ROOM_ID "roomId"
+
 static class JsonResponsePacketSerializer
 {
 public:

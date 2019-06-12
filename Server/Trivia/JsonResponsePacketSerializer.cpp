@@ -125,7 +125,10 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(CreateRoomResponse
 	vector<Byte> buffer;
 	json j;
 
+
+	//
 	j[STATUS] = to_string(response.status);
+	j[ROOM_ID] = to_string(response.id);
 
 	buffer = Helper::toBytes(j.dump());
 	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);

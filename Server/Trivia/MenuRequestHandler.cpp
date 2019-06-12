@@ -6,7 +6,7 @@ MenuRequestHandler::MenuRequestHandler()
 	
 }
 
-MenuRequestHandler::MenuRequestHandler(RoomManager rm)
+MenuRequestHandler::MenuRequestHandler(RoomManager* rm)
 {
 	this->m_roomManager = rm;
 }
@@ -89,7 +89,7 @@ RequestResult MenuRequestHandler::createRoom(Request r)
 	metadata.timePerQuestion = req.answerTimeout;
 	
 	//creates the room.
-	this->m_roomManager.createRoom(metadata, this->m_user);
+	this->m_roomManager->createRoom(metadata, this->m_user);
 	
 	resp.status = metadata.id;
 	result.response = JsonResponsePacketSerializer::serializerResponse(resp);
@@ -111,7 +111,7 @@ RequestResult MenuRequestHandler::joinRoom(Request r)
 	 resp.status = TRIVIA_OK;
 	 
 	 //Try to add the user.
-	 if (!this->m_roomManager.addUserToRoom(this->m_user, req.roomId))
+	 if (!this->m_roomManager->addUserToRoom(this->m_user, req.roomId))
 	 {
 		 //Failed to add the user. Change status accordingly.
 		 resp.status = ERROR_RESPONSE_ID;
@@ -135,7 +135,7 @@ RequestResult MenuRequestHandler::getPlayersInRoom(Request r)
 	GetPlayersInRoomResponse resp;
 
 	//Get the vecotr of users
-	vector<LoggedUser> users =  this->m_roomManager.getRoom(req.roomId).getAllUsers();
+	vector<LoggedUser> users =  this->m_roomManager->getRoom(req.roomId).getAllUsers();
 
 	//get all the usernames from the vector of users.
 
@@ -161,7 +161,7 @@ RequestResult MenuRequestHandler::getRooms(Request r)
 
 	GetRoomsRequest req = JsonRequestPacketDeserializer::deserializeGetRoomsRequest(r.buffer);
 
-	resp.rooms = this->m_roomManager.getRoomsData();
+	resp.rooms = this->m_roomManager->getRoomsData();
 	 
 	//Serializer the response to bytes
 	result.response = JsonResponsePacketSerializer::serializerResponse(resp);

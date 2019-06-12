@@ -10,6 +10,11 @@ LoggedUser::LoggedUser(string name)
 	this->m_username = name;
 }
 
+bool LoggedUser::operator==(LoggedUser other)
+{
+	return this->m_username == other.m_username;
+}
+
 //D'tor
 LoggedUser::~LoggedUser()
 {
