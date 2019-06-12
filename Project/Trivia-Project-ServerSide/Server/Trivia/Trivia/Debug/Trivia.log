@@ -1,5 +1,0 @@
-﻿  JsonRequestPacketDeserializer.cpp
-c:\googledrive\magshimim\cpp\15\trivia\trivia\trivia\trivia\response.h(28): warning C4091: 'static ': ignored on left of 'JsonResponsePacketSerializer' when no variable is declared
-c:\googledrive\magshimim\cpp\15\trivia\trivia\trivia\trivia\jsonrequestpacketdeserializer.h(25): warning C4091: 'static ': ignored on left of 'JsonRequestPacketDeserializer' when no variable is declared
-c:\googledrive\magshimim\cpp\15\trivia\trivia\trivia\trivia\jsonrequestpacketdeserializer.cpp(142): warning C4101: 'r': unreferenced local variable
-  Trivia.vcxproj -> C:\GoogleDrive\Magshimim\cpp\15\trivia\trivia\Trivia\Debug\Trivia.exe
