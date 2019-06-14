@@ -21,6 +21,8 @@ namespace ClientSide
     /// </summary>
     public partial class JoinRoomsWindow : Window
     {
+        private Dictionary<string, Room> allRooms = new Dictionary<string, Room>();
+
         // C'tor
         public JoinRoomsWindow()
         {
@@ -41,8 +43,10 @@ namespace ClientSide
             Communicator.SendMsg(arr, arr.Length);
             KeyValuePair<int, string> msg = Communicator.GetMsg();
 
-            var mainResJson = JsonConvert.DeserializeObject<Dictionary<string, string>>(msg.Value);
-            var roomResJson = JsonConvert.DeserializeObject<Dictionary<string, string>>(mainResJson["rooms"]);
+            var mainResJson = JsonConvert.DeserializeObject<Dictionary<string, object>>(msg.Value);
+            var v = mainResJson["rooms"].ToString();            
+            var roomResJson = JsonConvert.DeserializeObject<Dictionary<string, object>>(v);
+            Room room;
 
             if (roomResJson == null)
             {
@@ -51,16 +55,14 @@ namespace ClientSide
                 sb.Begin(ErrorLabel);
             }
 
-            PlayerList.Items.Add("asa1");
-            PlayerList.Items.Add("asa2");
-            PlayerList.Items.Add("asa3");
-            PlayerList.Items.Add("asa4");
-            //string msg = Communicator.GetMsgString();
-
-            //foreach (var i in rootObject["rooms"])
-            //{
-            //    RoomsList.Items.Add(i);
-            //}
+            int j = 0;
+            foreach (var i in roomResJson.Keys)
+            {
+                room = JsonConvert.DeserializeObject<Room>(roomResJson[i].ToString());
+                allRooms.Add(room.Name, room);
+                this.RoomsList.Items.Add(room.Name);
+                j++;
+            }
 
         }
 
@@ -100,12 +102,18 @@ namespace ClientSide
 
             // get the players
             Dictionary<string, int> json = new Dictionary<string, int>();
-            json.Add("roomId", 0);
+            json.Add("roomId", (int)allRooms[RoomsList.SelectedItem.ToString()].Id);
             string jsonString = JsonConvert.SerializeObject(json);
             byte[] arr = Helper.SerializeMsg(jsonString, 3);
             Communicator.SendMsg(arr, arr.Length);
             KeyValuePair<int, string> msg = Communicator.GetMsg();
-            int i = 0;
+
+            var v = JsonConvert.DeserializeObject(msg.Value);
+
+            //foreach (var i in v["players"])
+            //{
+            //    PlayerList.Items.Add(i);
+            //}
         }
     }
 }

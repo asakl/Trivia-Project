@@ -21,8 +21,8 @@
                     <Label Name="Rooms_Label" Content="List Of Rooms" HorizontalAlignment="Center" FontSize="30" Foreground="White" FontWeight="Bold"></Label>
                     <Label Content="Select Room:" HorizontalAlignment="Center" Foreground="White" FontSize="20" FontWeight="DemiBold"></Label>
                     <ListBox Name="RoomsList" Height="30" HorizontalContentAlignment="Center" Width="300" FontSize="17" SelectionChanged="RoomsList_SelectionChanged"></ListBox>
-                    <Label Content="Players In Room:" HorizontalAlignment="Center" Foreground="White" FontSize="20" FontWeight="DemiBold"></Label>
-                    <ListView Name="PlayerList" Height="30" HorizontalContentAlignment="Center" Width="300" FontSize="17"></ListView>
+                    <Label Content="Players In Room:" HorizontalAlignment="Center" Foreground="White" FontSize="20" FontWeight="DemiBold" Visibility="Hidden"></Label>
+                    <ListView Name="PlayerList" Height="30" HorizontalContentAlignment="Center" Width="300" FontSize="17" Visibility="Hidden"></ListView>
                     <Label Name="ErrorLabel" Content="There is no rooms..." Foreground="Red" HorizontalAlignment="Center" FontSize="15" FontWeight="DemiBold" Visibility="Hidden"></Label>
                 </StackPanel>
                 <StackPanel Margin="40">

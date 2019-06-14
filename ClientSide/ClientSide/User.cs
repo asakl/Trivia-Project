@@ -9,16 +9,16 @@ namespace ClientSide
     public class Room
     {
         private string name;
-        private uint room_id;
+        private uint id;
         private uint num_of_question;
-        private uint time_per_question;
-        private uint num_of_users;
+        private uint timePerQuestion;
+        private uint msxPlayers;
 
-        public uint Room_id { get => room_id; set => room_id = value; }
+        public uint Id { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
         public uint Num_of_question { get => num_of_question; set => num_of_question = value; }
-        public uint Time_per_question { get => time_per_question; set => time_per_question = value; }
-        public uint Num_of_users { get => num_of_users; set => num_of_users = value; }
+        public uint TimePerQuestion { get => timePerQuestion; set => timePerQuestion = value; }
+        public uint MsxPlayers { get => msxPlayers; set => msxPlayers = value; }
     }
 
     public static class User
@@ -35,9 +35,9 @@ namespace ClientSide
         {
             userRoom.Name = rname;
             userRoom.Num_of_question = qnum;
-            userRoom.Num_of_users = unum;
-            userRoom.Room_id = id;
-            userRoom.Time_per_question = time;
+            userRoom.MsxPlayers = unum;
+            userRoom.Id = id;
+            userRoom.TimePerQuestion = time;
         }
     }
 }

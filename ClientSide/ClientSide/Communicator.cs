@@ -53,19 +53,22 @@ namespace ClientSide
         static public KeyValuePair<int, string> GetMsg()
         {
             // read
-            byte[] buffer = new byte[100];
-            int bytesRead = clientStream.Read(buffer, 0, 100);
+            byte[] sizeBuffer = new byte[5];
+            int bytesRead = clientStream.Read(sizeBuffer, 0, 5);
 
             // get size
-            IEnumerable<byte> a = buffer.Take(5).Reverse().Take(4);
+            IEnumerable<byte> a = sizeBuffer.Reverse().Take(4);
             byte[] arr = a.ToArray();
             uint size = BitConverter.ToUInt32(arr, 0);
 
+            byte[] buffer = new byte[1024];
+            bytesRead = clientStream.Read(buffer, 0, 1024);
+
             // decode
-            string str = Encoding.UTF8.GetString(buffer, 0, 100);
+            string str = Encoding.UTF8.GetString(buffer, 0, (int)1024);
 
             // get json
-            return new KeyValuePair<int, string>(buffer[0], str.Substring(5, (int)size));
+            return new KeyValuePair<int, string>(sizeBuffer[0], str);
         }
 
         /// <summary>

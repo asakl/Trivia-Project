@@ -33,8 +33,8 @@ namespace ClientSide
 
             NameLabel.Content = "the room is - " + User.UserRoom.Name.Replace("_", "__");
             InfoList.Items.Add("num of question: " + User.UserRoom.Num_of_question);
-            InfoList.Items.Add("max num of users: " + User.UserRoom.Num_of_users);
-            InfoList.Items.Add("time per question: " + User.UserRoom.Time_per_question);
+            InfoList.Items.Add("max num of users: " + User.UserRoom.MsxPlayers);
+            InfoList.Items.Add("time per question: " + User.UserRoom.TimePerQuestion);
             UsersList.Items.Add(User.Username);
         }
 
