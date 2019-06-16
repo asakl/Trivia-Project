@@ -36,6 +36,7 @@ namespace ClientSide
         {
             //the func close the curr window and open the main window
             MainWindow mainWindow = new MainWindow();
+            Communicator.EndCommunicate = false;
             this.Close();
             mainWindow.Show();
         }
@@ -52,7 +53,6 @@ namespace ClientSide
 
             //return to main window
             Communicator.Finish();
-            Close();
 
             //close curr window
             e.Cancel = false;

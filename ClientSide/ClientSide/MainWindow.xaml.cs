@@ -23,6 +23,9 @@ namespace ClientSide
     public partial class MainWindow : Window
     {
         // C'tor
+
+        private bool ExitProg = true;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -39,7 +42,9 @@ namespace ClientSide
             {
                 // open error window and close this
                 ConnectionErrorWindow errorWindow = new ConnectionErrorWindow();
+                ExitProg = false;
                 this.Close();
+                ExitProg = true;
                 errorWindow.Show();
             }
 
@@ -78,7 +83,8 @@ namespace ClientSide
         {
             // open signup window and close this
             SignupWindow signupWindow = new SignupWindow();
-            this.Close();
+            Communicator.EndCommunicate = false;
+            Close();
             signupWindow.Show();
         }
 
@@ -159,6 +165,7 @@ namespace ClientSide
         {
             // open join room window and close this
             JoinRoomsWindow joinRoomsWindow = new JoinRoomsWindow();
+            Communicator.EndCommunicate = false;
             Close();
             joinRoomsWindow.Show();
         }
@@ -197,6 +204,7 @@ namespace ClientSide
         {
             // open create room window and close this
             CreateRoomWindow createRoomWindow = new CreateRoomWindow();
+            Communicator.EndCommunicate = false;
             Close();
             createRoomWindow.Show();
         }
@@ -210,6 +218,8 @@ namespace ClientSide
         {
             // open status window and close this
             MyStatusWindow myStatusWindow = new MyStatusWindow(User.Username);
+            this.Hide();
+            Communicator.EndCommunicate = false;
             Close();
             myStatusWindow.Show();
         }
@@ -223,6 +233,7 @@ namespace ClientSide
         {
             // open highscores window and close this
             HighscoresWindow highscores = new HighscoresWindow();
+            Communicator.EndCommunicate = false;
             Close();
             highscores.Show();
         }
@@ -234,7 +245,6 @@ namespace ClientSide
 
             //return to main window
             Communicator.Finish();
-            Close();
 
             //close curr window
             e.Cancel = false;

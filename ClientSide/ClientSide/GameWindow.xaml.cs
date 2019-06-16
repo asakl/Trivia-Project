@@ -86,7 +86,6 @@ namespace ClientSide
 
             //return to main window
             Communicator.Finish();
-            Close();
 
             //close curr window
             e.Cancel = false;

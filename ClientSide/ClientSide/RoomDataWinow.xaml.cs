@@ -47,6 +47,7 @@ namespace ClientSide
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow main = new MainWindow();
+            Communicator.EndCommunicate = false;
             Close();
             main.Show();
         }
@@ -54,6 +55,7 @@ namespace ClientSide
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
             GameWindow game = new GameWindow();
+            Communicator.EndCommunicate = false;
             Close();
             game.Show();
         }
@@ -66,7 +68,6 @@ namespace ClientSide
 
             //return to main window
             Communicator.Finish();
-            Close();
 
             //close curr window
             e.Cancel = false;

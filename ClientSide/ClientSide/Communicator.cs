@@ -20,6 +20,9 @@ namespace ClientSide
         static private TcpClient client = new TcpClient();
         static private IPEndPoint serverEndPoint;
         static private NetworkStream clientStream;
+        static private bool endCommunicate = true;
+
+        public static bool EndCommunicate { get => endCommunicate; set => endCommunicate = value; }
 
         static public void Connect()
         {
@@ -77,13 +80,17 @@ namespace ClientSide
         /// </summary>
         static public void Finish()
         {
-            // define var
-            string jsonString = "{\"username\": \"" + User.Username + "\"}";
+            if (endCommunicate)
+            {
+                // define var
+                string jsonString = "{\"username\": \"" + User.Username + "\"}";
 
-            // make the json string into byte list
-            byte[] arr = Helper.SerializeMsg(jsonString, 6);
-            Communicator.SendMsg(arr, arr.Length);
-            client.Close();
+                // make the json string into byte list
+                byte[] arr = Helper.SerializeMsg(jsonString, 6);
+                Communicator.SendMsg(arr, arr.Length);
+                client.Close();
+            }
+            endCommunicate = true;
         }
 
         static public void Init(string path)
