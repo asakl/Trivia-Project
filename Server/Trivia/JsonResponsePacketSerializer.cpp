@@ -75,8 +75,6 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(LogoutResponse res
 	string asString = "";
 	json j;
 
-
-
 	//adds the data to the json object.
 	j[STATUS] = to_string(response.status);
 	

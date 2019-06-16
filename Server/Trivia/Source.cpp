@@ -23,35 +23,18 @@ int main()
 	return 0;
 }
 
+
 int main2()
 {
-	RoomManager rm;
-	LoggedUser admin("admin"), player1("p1");
-	RoomData metadata;
-
-	metadata.isActive = false;
-	metadata.maxPlayers = 5;
-	metadata.name = "Test";
-	metadata.timePerQuestion = 20;
+	SqliteDatabase* db = new SqliteDatabase();
 
 
-	metadata.id = rm.createRoom(metadata, admin);
-	rm.addUserToRoom(player1,metadata.id);
+	LoginManager* lm = new LoginManager(*(IDatabase*)db);
+	LoggedUser t("asa");
 
-	auto at = rm.getRoom(metadata.id).getAllUsers();
-	vector<string> usernames;
+	lm->login("asa", "asa1");
+	lm->logout(t);
 
-	for (auto it = at.begin(); it != at.end(); it++)
-	{
-		usernames.push_back((*it).getUsername());
-	}
-
-	for (auto it = usernames.begin(); it != usernames.end(); it++)
-	{
-		cout << (*it) << endl;
-	}
-
-	system("pause");
 
 	return 0;
 }

@@ -139,7 +139,6 @@ void Communicator::handleRequests(SOCKET client_socket)
 		if (ret == INVALID_SOCKET || ret == SOCKET_ERROR)
 		{
 			cout << "Client " << client_socket << " closed the socket" << endl;
-			this->m_clients.erase(client_socket);
 			break;
 		}
 
@@ -153,7 +152,12 @@ void Communicator::handleRequests(SOCKET client_socket)
 		if (currentRequest.id == SIGNOUT_ID)
 		{
 			this->m_clients.erase(client_socket);
+
+			//Logout.
+			currentHandler = (IRequestHandler*)this->m_handlerFactory->createLoginRequestHandler();
+			currentHandler->handleRequest(currentRequest);
 			closesocket(client_socket);
+
 			break;
 		}
 
@@ -164,6 +168,7 @@ void Communicator::handleRequests(SOCKET client_socket)
 		if (currentHandler != nullptr)
 		{
 			this->m_clients[client_socket] = currentHandler;
+
 			res = this->m_clients[client_socket]->handleRequest(currentRequest);
 		}
 
@@ -177,8 +182,6 @@ void Communicator::handleRequests(SOCKET client_socket)
 		//send data to the client
 		try
 		{
-			//Send the message length and code
-			//Helper::sendData(client_socket, res.msg);
 			//sending data to client.
 			Helper::sendData(client_socket, Helper::toString(res.response));
 		}

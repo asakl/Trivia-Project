@@ -18,4 +18,5 @@ public:
 	static StartGameRequest deserializeStartGameRequest(vector<Byte> buffer);
 	static GetRoomStateRequest deserializeGetRoomStateRequest(vector<Byte> buffer);
 	static LeaveRoomRequset deserializeLeaveRoomRequset(vector<Byte> buffer);
+	static LogoutRequest deserializeLogoutRequest(vector<Byte> buffer);
 };

@@ -26,7 +26,6 @@ struct ErrorResponse
 typedef struct LogoutResponse
 {
 	unsigned int status;
-	unsigned int responseLength;
 }LogoutResponse;
 
 

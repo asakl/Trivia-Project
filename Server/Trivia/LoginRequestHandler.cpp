@@ -46,21 +46,32 @@ RequestResult LoginRequestHandler::handleRequest(Request request)
 	}
 	else if (SIGNUP_ID == request.id)
 	{
-		//signup
-		try
-		{
-			ret = this->signup(request);
-		}
-		//error
-		catch (const std::exception& e)
-		{
-			cout << e.what() << endl;
-		}
+		ret = this->signup(request);
 	}
 
-	
+	else if (SIGNOUT_ID == request.id)
+	{
+		this->logout(request);
+	}
 
 	ret.newHandler = this;
+	return ret;
+}
+
+RequestResult LoginRequestHandler::logout(Request r)
+{
+	RequestResult ret;
+	LogoutRequest req = JsonRequestPacketDeserializer::deserializeLogoutRequest(r.buffer);
+	LogoutResponse resp = { 0 };
+	LoggedUser toDelete(req.username);
+
+	this->m_loginManager->logout(toDelete);
+
+
+	ret.response = JsonResponsePacketSerializer::serializerResponse(resp);
+
+	ret.newHandler = this;
+
 	return ret;
 }
 

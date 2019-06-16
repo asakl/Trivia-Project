@@ -54,7 +54,6 @@ void LoginManager::login(string name, string pass)
 	delete user;
 	if (index != this->m_loggedUsers.end())
 	{
-		
 		throw exception("error! User is already is logged in");
 	}
 

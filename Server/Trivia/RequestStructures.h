@@ -24,6 +24,10 @@ typedef struct SignupRequest
 	string password;
 	string email;
 }SignupRequest;
+typedef struct LogoutRequest
+{
+	string username;
+};
 typedef struct RequestResult
 {
 	vector<Byte> response;

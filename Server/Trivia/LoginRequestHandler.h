@@ -26,6 +26,7 @@ public:
 private:
 	LoginManager *m_loginManager;
 	
+	RequestResult logout(Request);
 	RequestResult login(Request);
 	RequestResult signup(Request);
 };

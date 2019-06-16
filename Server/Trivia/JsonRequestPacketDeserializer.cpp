@@ -163,3 +163,14 @@ LeaveRoomRequset JsonRequestPacketDeserializer::deserializeLeaveRoomRequset(vect
 
 	return ret;
 }
+
+LogoutRequest JsonRequestPacketDeserializer::deserializeLogoutRequest(vector<Byte> buffer)
+{
+	LogoutRequest ret;
+
+	auto j = json::parse(Helper::getDictPartOfMessage(buffer));
+
+	ret.username = j[USER_KEY].get<string>();
+	
+	return ret;
+}
