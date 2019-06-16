@@ -78,7 +78,7 @@ namespace ClientSide
         static public void Finish()
         {
             // define var
-            string jsonString = "{\"msg\": \"goodbey\"}";
+            string jsonString = "{\"username\": \"" + User.Username + "\"}";
 
             // make the json string into byte list
             byte[] arr = Helper.SerializeMsg(jsonString, 6);

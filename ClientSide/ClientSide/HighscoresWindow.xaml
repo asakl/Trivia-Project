@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientSide"
         mc:Ignorable="d"
-        Title="HighscoresWindow" Height="400" Width="400" Background="DarkGoldenrod">
+        Title="HighscoresWindow" Height="500" Width="400" Background="DarkGoldenrod">
     <Grid>
         <Border Background="DimGray" Margin="30,30,30,30" CornerRadius="40">
             <StackPanel VerticalAlignment="Center">

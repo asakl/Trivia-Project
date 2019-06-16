@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientSide"
         mc:Ignorable="d"
-        Title="JoinRoomsWindow" Height="600" Width="500" Background="DarkGreen">
+        Title="JoinRoomsWindow" Height="500" Width="400" Background="DarkGreen">
     <Window.Resources>
         <Storyboard x:Key="sbHideAnimation" >
             <DoubleAnimation Storyboard.TargetProperty="Opacity"  From="1" To="1" Duration="0:0:3" />
@@ -15,7 +15,7 @@
         </Storyboard>
     </Window.Resources>
     <Grid>
-        <Border Background="DimGray" Margin="40,30,40,40" CornerRadius="40">
+        <Border Background="DimGray" Margin="40,5,40,40" CornerRadius="40">
             <StackPanel VerticalAlignment="Center">
                 <StackPanel>
                     <Label Name="Rooms_Label" Content="List Of Rooms" HorizontalAlignment="Center" FontSize="30" Foreground="White" FontWeight="Bold"></Label>
@@ -26,9 +26,9 @@
                     <Label Name="ErrorLabel" Content="There is no rooms..." Foreground="Red" HorizontalAlignment="Center" FontSize="15" FontWeight="DemiBold" Visibility="Hidden"></Label>
                 </StackPanel>
                 <StackPanel Margin="40">
-                    <Button Name="Refresh_Button" Content="Refresh" Width="250" Height="40" Margin="5" Click="Refresh_Button_Click" FontSize="20" FontWeight="DemiBold"></Button>
-                    <Button Name="Join_Button" Content="Join" Width="250" Height="40" Margin="5" FontSize="20" FontWeight="DemiBold"></Button>
-                    <Button Name="BackButton" Content="Back" Width="250" Height="40" Margin="5" Click="BackButton_Click" FontSize="20" FontWeight="DemiBold"></Button>
+                    <Button Name="Refresh_Button" Content="Refresh" Width="200" Height="40" Margin="5" Click="Refresh_Button_Click" FontSize="20" FontWeight="DemiBold" ></Button>
+                    <Button Name="Join_Button" Content="Join" Width="200" Height="40" Margin="5" FontSize="20" FontWeight="DemiBold"></Button>
+                    <Button Name="BackButton" Content="Back" Width="200" Height="40" Margin="5" Click="BackButton_Click" FontSize="20" FontWeight="DemiBold"></Button>
                 </StackPanel>
             </StackPanel>
         </Border>

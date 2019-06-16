@@ -15,7 +15,7 @@
                     <ListView Name="InfoList" Height="30" FontSize="17" Margin="5"></ListView>
                     <ListView Name="UsersList"  FontSize="15" Height="150" ScrollViewer.VerticalScrollBarVisibility="Auto" Margin="5"></ListView>
                     <Button Name="BackButton" Content="Close" Height="40" Margin="5" Width="200" FontSize="25" Click="BackButton_Click"></Button>
-                    <Button Name="StartButton" Content="Start Game" Height="40" Margin="5" Width="200" FontSize="25"></Button>
+                    <Button Name="StartButton" Content="Start Game" Height="40" Margin="5" Width="200" FontSize="25" Click="StartButton_Click"></Button>
                 </StackPanel>
             </Grid>
         </Border>

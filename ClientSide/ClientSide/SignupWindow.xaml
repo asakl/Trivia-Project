@@ -6,10 +6,10 @@
       xmlns:local="clr-namespace:ClientSide"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
-      Title="SignupWindow" Height="400" Width="400" Background="DarkRed">
+      Title="SignupWindow" Height="500" Width="400" Background="DarkRed">
     <Grid>
         <Border Background="DimGray" Margin="30,10,30,5" CornerRadius="40">
-            <StackPanel Name="LoginPanel" Margin="20,5,20,5">
+            <StackPanel Name="LoginPanel" Margin="20,5,20,5" VerticalAlignment="Center">
                 <Label Name="LoginLabel" Content="Register" FontSize="50" FontStyle="Italic" FontWeight="Bold" HorizontalContentAlignment="Center" Foreground="White"></Label>
                 <Separator Background="White" Width="150"></Separator>
                 <Label Name="UsernameLabel" Content="Username" FontSize="20" FontWeight="DemiBold" Foreground="White" HorizontalAlignment="Center" HorizontalContentAlignment="Left" Width="150"/>

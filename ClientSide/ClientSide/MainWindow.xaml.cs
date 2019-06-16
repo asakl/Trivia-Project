@@ -35,7 +35,7 @@ namespace ClientSide
                 Communicator.Connect();
             }
             // open the error connection window
-            catch(Exception)
+            catch (Exception)
             {
                 // open error window and close this
                 ConnectionErrorWindow errorWindow = new ConnectionErrorWindow();
@@ -52,7 +52,7 @@ namespace ClientSide
                 LoggedUser();
             }
         }
-        
+
         /// <summary>
         /// the func log a user into sys
         /// </summary>
@@ -81,7 +81,7 @@ namespace ClientSide
             this.Close();
             signupWindow.Show();
         }
-        
+
         /// <summary>
         /// the user click on the login button
         /// </summary>
@@ -92,7 +92,7 @@ namespace ClientSide
             // define vars
             Dictionary<string, string> json = new Dictionary<string, string>(2);
             bool valid = true;
-             
+
             // create msg dict
             valid &= Helper.AddToJson(json, "username", this.UsernameText.GetLineText(0));
             valid &= Helper.AddToJson(json, "password", this.PasswordText.Password);
@@ -108,7 +108,7 @@ namespace ClientSide
                 // send msg and get res
                 Communicator.SendMsg(arr, arr.Length);
                 KeyValuePair<int, string> msg = Communicator.GetMsg();
-                
+
                 // the user is valid
                 if ((msg.Key) == 0)
                 {
@@ -118,8 +118,17 @@ namespace ClientSide
                 }
                 else
                 {
+                    var v = JsonConvert.DeserializeObject<Dictionary<string, string>>(msg.Value);
+                    if (v["message"].Length > 1)
+                    {
+                        v = JsonConvert.DeserializeObject<Dictionary<string, string>>(v["message"]);
+                        ErrorLabel.Content = v["msg"];
+                    }
                     // show erre label
-                    ErrorLabel.Content = "username or password incorrect";
+                    else
+                    {
+                        ErrorLabel.Content = "username or password incorrect";
+                    }
                     ErrorLabel.Visibility = Visibility.Visible;
                 }
             }
@@ -216,6 +225,19 @@ namespace ClientSide
             HighscoresWindow highscores = new HighscoresWindow();
             Close();
             highscores.Show();
+        }
+        //the user click 'close'
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            //stop the default closing
+            e.Cancel = true;
+
+            //return to main window
+            Communicator.Finish();
+            Close();
+
+            //close curr window
+            e.Cancel = false;
         }
     }
 }

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace ClientSide
 {
@@ -54,14 +55,16 @@ namespace ClientSide
                 Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
                 sb.Begin(ErrorLabel);
             }
-
-            int j = 0;
-            foreach (var i in roomResJson.Keys)
+            else
             {
-                room = JsonConvert.DeserializeObject<Room>(roomResJson[i].ToString());
-                allRooms.Add(room.Name, room);
-                this.RoomsList.Items.Add(room.Name);
-                j++;
+                int j = 0;
+                foreach (var i in roomResJson.Keys)
+                {
+                    room = JsonConvert.DeserializeObject<Room>(roomResJson[i].ToString());
+                    allRooms.Add(room.Name, room);
+                    this.RoomsList.Items.Add(room.Name);
+                    j++;
+                }
             }
 
         }
@@ -114,6 +117,20 @@ namespace ClientSide
             //{
             //    PlayerList.Items.Add(i);
             //}
+        }
+
+        //the user click 'close'
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            //stop the default closing
+            e.Cancel = true;
+
+            //return to main window
+            Communicator.Finish();
+            Close();
+
+            //close curr window
+            e.Cancel = false;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,6 +37,20 @@ namespace ClientSide
             MainWindow mainWindow = new MainWindow();
             this.Close();
             mainWindow.Show();
+        }
+
+        //the user click 'close'
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            //stop the default closing
+            e.Cancel = true;
+
+            //return to main window
+            Communicator.Finish();
+            Close();
+
+            //close curr window
+            e.Cancel = false;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,7 +44,21 @@ namespace ClientSide
             this.Close();
             mainWindow.Show();
         }
-        
+
+        //the user click 'close'
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            //stop the default closing
+            e.Cancel = true;
+
+            //return to main window
+            Communicator.Finish();
+            Close();
+
+            //close curr window
+            e.Cancel = false;
+        }
+
         /// <summary>
         /// the func add key and val to dict and check if the val is valid
         /// </summary>

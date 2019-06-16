@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClientSide"
         mc:Ignorable="d"
-        Title="MyStatusWindow" Height="400" Width="400" Background="DarkSalmon">
+        Title="MyStatusWindow" Height="500" Width="400" Background="DarkSalmon">
     <Grid>
         <Border Background="DimGray" Margin="30,30,30,30" CornerRadius="40">
-            <StackPanel>
+            <StackPanel VerticalAlignment="Center">
                 <Label Content="My Preformance:" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center" Margin="5"></Label>
                 <Label Name="UsernameLabel" Content="" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Center"></Label>
                 <Label Content="Number Of Games:" Foreground="White" FontSize="20" FontWeight="DemiBold" HorizontalAlignment="Left" Margin="2"></Label>
