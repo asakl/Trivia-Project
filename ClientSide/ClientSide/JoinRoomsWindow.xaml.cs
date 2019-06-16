@@ -37,6 +37,13 @@ namespace ClientSide
         private void Refresh()
         {
             // define vars
+            //RoomsList.SelectedIndex = -1;
+            RoomsList.Items.Clear();
+            allRooms.Clear();
+
+            User_Label.Visibility = Visibility.Hidden;
+            PlayerList.Visibility = Visibility.Hidden;
+
             string jsonString = "{\"status\": 7}";
             byte[] arr = Helper.SerializeMsg(jsonString,7);
 
@@ -101,23 +108,26 @@ namespace ClientSide
         private void RoomsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // show the players in the room
-            User_Label.Visibility = Visibility.Visible;
-            PlayerList.Visibility = Visibility.Visible;
+            if (RoomsList.Items.Count > 0)
+            {
+                User_Label.Visibility = Visibility.Visible;
+                PlayerList.Visibility = Visibility.Visible;
 
-            // get the players
-            Dictionary<string, int> json = new Dictionary<string, int>();
-            json.Add("roomId", (int)allRooms[RoomsList.SelectedItem.ToString()].Id);
-            string jsonString = JsonConvert.SerializeObject(json);
-            byte[] arr = Helper.SerializeMsg(jsonString, 3);
-            Communicator.SendMsg(arr, arr.Length);
-            KeyValuePair<int, string> msg = Communicator.GetMsg();
+                // get the players
+                Dictionary<string, int> json = new Dictionary<string, int>();
+                json.Add("roomId", (int)allRooms[RoomsList.SelectedItem.ToString()].Id);
+                string jsonString = JsonConvert.SerializeObject(json);
+                byte[] arr = Helper.SerializeMsg(jsonString, 3);
+                Communicator.SendMsg(arr, arr.Length);
+                KeyValuePair<int, string> msg = Communicator.GetMsg();
 
-            var v = JsonConvert.DeserializeObject(msg.Value);
+                var v = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(msg.Value);
 
-            //foreach (var i in v["players"])
-            //{
-            //    PlayerList.Items.Add(i);
-            //}
+                foreach (var i in v["players"])
+                {
+                    PlayerList.Items.Add(i);
+                }
+            }
         }
 
         //the user click 'close'
@@ -131,6 +141,27 @@ namespace ClientSide
 
             //close curr window
             e.Cancel = false;
+        }
+
+        private void Join_Button_Click(object sender, RoutedEventArgs e)
+        {
+            Dictionary<string, int> json = new Dictionary<string, int>();
+            json.Add("roomId", (int)allRooms[RoomsList.SelectedItem.ToString()].Id);
+            string jsonString = JsonConvert.SerializeObject(json);
+            byte[] arr = Helper.SerializeMsg(jsonString, 3);
+            Communicator.SendMsg(arr, arr.Length);
+            KeyValuePair<int, string> msg = Communicator.GetMsg();
+            User.UserRoom = allRooms[RoomsList.SelectedItem.ToString()];
+            var v = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(msg.Value);
+            User.UserRoom.Players = new List<string>();
+            foreach (var i in v["players"])
+            {
+                User.UserRoom.Players.Add(i);
+            }
+            RoomDataWinow dataWinow = new RoomDataWinow();
+            Communicator.EndCommunicate = false;
+            Close();
+            dataWinow.Show();
         }
     }
 }

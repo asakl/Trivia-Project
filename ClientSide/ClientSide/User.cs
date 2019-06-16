@@ -13,12 +13,14 @@ namespace ClientSide
         private uint num_of_question;
         private uint timePerQuestion;
         private uint msxPlayers;
+        private List<string> players;
 
         public uint Id { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
         public uint Num_of_question { get => num_of_question; set => num_of_question = value; }
         public uint TimePerQuestion { get => timePerQuestion; set => timePerQuestion = value; }
         public uint MsxPlayers { get => msxPlayers; set => msxPlayers = value; }
+        public List<string> Players { get => players; set => players = value; }
     }
 
     public static class User
@@ -38,6 +40,7 @@ namespace ClientSide
             userRoom.MsxPlayers = unum;
             userRoom.Id = id;
             userRoom.TimePerQuestion = time;
+            userRoom.Players = new List<string>();
         }
     }
 }

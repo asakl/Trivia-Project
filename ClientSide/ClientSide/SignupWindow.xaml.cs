@@ -68,6 +68,7 @@ namespace ClientSide
                 //valid request
                 if (pair.Key == 0)
                 {
+                    User.Username = json["username"];
                     ReturnFunc();
                 }
             }

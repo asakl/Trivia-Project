@@ -23,9 +23,6 @@ namespace ClientSide
     public partial class MainWindow : Window
     {
         // C'tor
-
-        private bool ExitProg = true;
-
         public MainWindow()
         {
             InitializeComponent();
@@ -42,9 +39,8 @@ namespace ClientSide
             {
                 // open error window and close this
                 ConnectionErrorWindow errorWindow = new ConnectionErrorWindow();
-                ExitProg = false;
-                this.Close();
-                ExitProg = true;
+                Communicator.EndCommunicate = false;
+                Close();
                 errorWindow.Show();
             }
 
@@ -152,7 +148,6 @@ namespace ClientSide
         /// <param name="e"></param>
         private void Quit_Button_Click(object sender, RoutedEventArgs e)
         {
-            Communicator.Finish();
             Close();
         }
 

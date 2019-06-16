@@ -37,6 +37,10 @@ namespace ClientSide
             InfoList.Items.Add("max num of users: " + User.UserRoom.MsxPlayers);
             InfoList.Items.Add("time per question: " + User.UserRoom.TimePerQuestion);
             UsersList.Items.Add(User.Username);
+            foreach (var i in User.UserRoom.Players)
+            {
+                UsersList.Items.Add(i);
+            }
         }
 
         public void addName()
