@@ -72,29 +72,25 @@ RequestResult MenuRequestHandler::createRoom(Request r)
 	CreateRoomRequest req;
 	CreateRoomResponse resp;
 
-
-	try
-	{
-		//Deserialize the request
-		req = JsonRequestPacketDeserializer::deserializeCreateRoomRequest(r.buffer);
-	}
-	catch (const std::exception& e)
-	{
-		cout << e.what() << endl;
-	}
+	//Deserialize the request
+	req = JsonRequestPacketDeserializer::deserializeCreateRoomRequest(r.buffer);
+	
 
 	//config the room
 	metadata.maxPlayers = req.maxUsers;
 	metadata.name = req.roomName;
 	metadata.timePerQuestion = req.answerTimeout;
-	
-	//creates the room.
-	this->m_roomManager->createRoom(metadata, this->m_user);
-	
-	resp.status = metadata.id;
-	result.response = JsonResponsePacketSerializer::serializerResponse(resp);
-	result.newHandler = nullptr; //What should I do?
+	metadata.isActive = false;
 
+
+
+	//creates the room.
+	resp.id = this->m_roomManager->createRoom(metadata, this->m_user);
+	
+	resp.status = TRIVIA_OK;
+	result.response = JsonResponsePacketSerializer::serializerResponse(resp);
+	result.newHandler = this;
+	
 	return result;
 }
 
@@ -134,18 +130,21 @@ RequestResult MenuRequestHandler::getPlayersInRoom(Request r)
 	GetPlayersInRoomRequest req = JsonRequestPacketDeserializer::deserializeGetPlayersRequest(r.buffer);
 	GetPlayersInRoomResponse resp;
 
+
+
 	//Get the vecotr of users
 	vector<LoggedUser> users =  this->m_roomManager->getRoom(req.roomId).getAllUsers();
 
 	//get all the usernames from the vector of users.
 
-	for (int i = 0; i < users.size(); i++)
+
+	for (auto it = users.begin(); it != users.end(); it++)
 	{
-		resp.players[i] = users[i].getUsername();
+		resp.players.push_back((*it).getUsername());
 	}
-	
+
 	result.response = JsonResponsePacketSerializer::serializerResponse(resp);
-	result.newHandler = nullptr;
+	result.newHandler = this;
 
 
 	return result;

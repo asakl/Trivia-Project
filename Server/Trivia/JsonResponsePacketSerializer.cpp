@@ -103,6 +103,8 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(GetRoomsResponse r
 	buffer = Helper::toBytes(j.dump());
 	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
 
+	cout << j.dump() << endl;
+
 	return buffer;
 }
 
@@ -157,9 +159,6 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(GetPlayersInRoomRe
 	vector<Byte> buffer;
 	json j;
 
-
-	//adds the status code to the json
-	j[STATUS] = to_string(response.status);
 	//adds the players vector to the json
 	j[PLAYERS] = Helper::vectorToJson(response.players).dump();
 

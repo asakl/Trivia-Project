@@ -139,7 +139,8 @@ void Communicator::handleRequests(SOCKET client_socket)
 		if (ret == INVALID_SOCKET || ret == SOCKET_ERROR)
 		{
 			cout << "Client " << client_socket << " closed the socket" << endl;
-			return;
+			this->m_clients.erase(client_socket);
+			break;
 		}
 
 

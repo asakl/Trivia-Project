@@ -8,7 +8,8 @@ using std::map;
 class RoomManager
 {
 public:
-	void createRoom(RoomData,LoggedUser);
+	RoomManager();
+	unsigned int createRoom(RoomData,LoggedUser);
 	void deleteRoom(unsigned int);
 	bool addUserToRoom(LoggedUser, unsigned int);
 	unsigned int getRoomState(unsigned int);

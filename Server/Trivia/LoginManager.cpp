@@ -45,7 +45,20 @@ void LoginManager::signup(string name, string pass, string email)
 //login
 void LoginManager::login(string name, string pass)
 {
-	LoggedUser * user = this->m_database->login(name, pass);
+	LoggedUser* user = new LoggedUser(name);
+	
+	//Check if user is aleady logged in.
+
+	auto index = std::find(this->m_loggedUsers.begin(), this->m_loggedUsers.end(), *user);
+
+	delete user;
+	if (index != this->m_loggedUsers.end())
+	{
+		
+		throw exception("error! User is already is logged in");
+	}
+
+	user = this->m_database->login(name, pass);
 	if (user == nullptr)
 	{
 		throw exception("error! username or password is incorrect");

@@ -23,7 +23,7 @@ public:
 	MenuRequestHandler* createMenuRequestHandler();
 private:
 	LoginManager* m_loginManager;
-
+	LoginRequestHandler* globalLoginRquestHandler;
 	RoomManager* m_roomManager;
 	HighscoreTable m_highscoreTable;
 };

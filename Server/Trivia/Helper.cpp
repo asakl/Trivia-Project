@@ -77,7 +77,6 @@ string Helper::getDictPartOfMessage(vector<Byte> & buf)
 		msgString += (char)buf[i].to_ulong();
 	}
 
-	//msgString += "\"";
 
 	return msgString;
 }
@@ -93,7 +92,7 @@ void Helper::sendData(SOCKET sc, std::string message)
 	const char* data = message.c_str();
 	int status = send(sc, data, message.size(), 0);
 
-	cout << "Message sent to client " << sc << "." << endl << "Message status: " << status << "  " << endl << "Last error: " << GetLastError() << endl;
+	cout << "Message sent to client " << sc << "." << endl;
 
 	//send the data
 	if (status == INVALID_SOCKET)
@@ -209,7 +208,11 @@ nlohmann::json Helper::vectorToJson(const vector<RoomData> vec)
 
 		//Adds the room to the json of rooms.
 		j[to_string(i)] = currentRoom.dump();
+		
+		
 	}
+
+	cout << j.dump() << endl;
 
 	return j;
 }

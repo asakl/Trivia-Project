@@ -2,10 +2,15 @@
 
 
 
+RoomManager::RoomManager()
+{
+	this->nextID = 5;
+}
+
 //The functions createRoom adds a room to m_rooms.
 //Input: LoggedUser to add to the room.
 //Input: None.
-void RoomManager::createRoom(RoomData metadata,LoggedUser user)
+unsigned int RoomManager::createRoom(RoomData metadata,LoggedUser user)
 {
 	metadata.id = this->nextID;
 
@@ -16,8 +21,9 @@ void RoomManager::createRoom(RoomData metadata,LoggedUser user)
 	//add the room to the room map
 	this->m_rooms[this->nextID] = newRoom;
 
-	//set the next id.
-	this->nextID++;
+	//return the room id, and after set the next id
+	return this->nextID++;
+
 }
 
 //the function delete room remove a room from the room map.
