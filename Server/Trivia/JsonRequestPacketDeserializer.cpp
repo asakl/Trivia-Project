@@ -167,7 +167,8 @@ LeaveRoomRequset JsonRequestPacketDeserializer::deserializeLeaveRoomRequset(vect
 
 	auto j = json::parse(Helper::getDictPartOfMessage(buffer));
 
-	ret.status = j[STATUS];
+	ret.status = j[STATUS].get<unsigned int>();
+	ret.roomId = j[ROOMID_KEY].get<unsigned int>();
 
 	return ret;
 }

@@ -84,7 +84,7 @@ vector<RoomData> RoomManager::getRoomsData()
 //The function getRoom gets an id, and returns the room with that id.
 //Input: And id (int)
 //Output: A room with the id.
-const Room RoomManager::getRoom(unsigned int id)
+Room* RoomManager::getRoom(unsigned int id)
 {
-	return this->m_rooms[id];
+	return &this->m_rooms[id];
 }

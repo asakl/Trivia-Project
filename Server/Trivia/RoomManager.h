@@ -14,7 +14,7 @@ public:
 	bool addUserToRoom(LoggedUser, unsigned int);
 	unsigned int getRoomState(unsigned int);
 	vector<RoomData> getRoomsData();
-	const Room getRoom(unsigned int);
+	Room* getRoom(unsigned int);
 
 
 private:

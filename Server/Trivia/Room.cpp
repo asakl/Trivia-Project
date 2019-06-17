@@ -26,7 +26,7 @@ bool Room::addUser(const LoggedUser user)
 	return false;
 }
 
-void Room::removeUser(const string username)
+bool Room::removeUser(const string username)
 {
 	//go over the vector with iterator.
 	for (auto it = this->m_users.begin(); it != this->m_users.end(); it++)
@@ -35,10 +35,11 @@ void Room::removeUser(const string username)
 		if (it->getUsername() == username)
 		{
 			this->m_users.erase(it);
-			return;
+			return true;
 		}
 	}
 
+	return false;
 }
 
 const RoomData Room::getRoomData() const

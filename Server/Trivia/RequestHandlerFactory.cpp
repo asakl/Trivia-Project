@@ -46,5 +46,5 @@ RoomAdminRequestHandler* RequestHandlerFactory::createRoomAdminRequestHandler(Re
 	else if (req.id == START_GAME_REQUEST)
 		roomId = JsonRequestPacketDeserializer::deserializeStartGameRequest(req.buffer).roomId;
 
-	return new RoomAdminRequestHandler((Room)this->m_roomManager->getRoom(roomId),this->m_roomManager);
+	return new RoomAdminRequestHandler(*this->m_roomManager->getRoom(roomId),this->m_roomManager);
 }
