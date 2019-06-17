@@ -104,6 +104,9 @@ namespace ClientSide
             validInput &= AddToJson(json2, "questionCount", this.NumPlayersInput.GetLineText(0), ref num);
             validInput &= AddToJson(json2, "maxUsers", this.NumQuestionsInput.GetLineText(0), ref num);
             validInput &= AddToJson(json2, "answerTimeout", this.TimeInput.GetLineText(0), ref num);
+            validInput &= Helper.AddToJson(json1, "username", User.Username);
+
+
 
             // all input is valid?
             if (validInput)

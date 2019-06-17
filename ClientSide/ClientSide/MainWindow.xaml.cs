@@ -27,7 +27,7 @@ namespace ClientSide
         {
             InitializeComponent();
 
-            Communicator.Init(@"C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\ClientSide\config.txt");
+            Communicator.Init(@"C:\Users\Ishay\Desktop\TriviaClient\ClientSide\config.txt");
 
             // try to connect
             try
