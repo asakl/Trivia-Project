@@ -95,3 +95,5 @@ C:\Users\Ishay\Desktop\TriviaClient\ClientSide\ClientSide\obj\Debug\ClientSide.c
 C:\Users\Ishay\Desktop\TriviaClient\ClientSide\ClientSide\obj\Debug\ClientSide.csproj.CopyComplete
 C:\Users\Ishay\Desktop\TriviaClient\ClientSide\ClientSide\obj\Debug\ClientSide.exe
 C:\Users\Ishay\Desktop\TriviaClient\ClientSide\ClientSide\obj\Debug\ClientSide.pdb
+C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\Trivia-Project\ClientSide\ClientSide\obj\Debug\GameWindow.g.cs
+C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\Trivia-Project\ClientSide\ClientSide\obj\Debug\GameWindow.baml

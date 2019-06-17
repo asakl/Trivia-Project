@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
 
 namespace ClientSide
 {
@@ -24,6 +25,21 @@ namespace ClientSide
         public HighscoresWindow()
         {
             InitializeComponent();
+            string s = "";
+            byte[] arr = Helper.SerializeMsg(s, 8);
+            Communicator.SendMsg(arr, arr.Length);
+            KeyValuePair<int, string> msg = Communicator.GetMsg();
+
+            if (msg.Key == 0)
+            {
+                var json = JsonConvert.DeserializeObject<Dictionary<string, object>>(msg.Value);
+                var top = json["highscores"];
+                string[] str = ((System.Collections.IEnumerable)top).Cast<object>().Select(x => x.ToString()).ToArray();
+
+                ThirdPlace.Content = ThirdPlace.Content + "\t\t" + str[0];
+                SecondPlace.Content = SecondPlace.Content + "\t\t" + str[1];
+                FirstPlace.Content = FirstPlace.Content + "\t\t" + str[2];
+            }
         }
 
         /// <summary>
