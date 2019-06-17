@@ -120,16 +120,23 @@ namespace ClientSide
                 // send and get res
                 Communicator.SendMsg(arr, arr.Length);
                 KeyValuePair<int, string> msg = Communicator.GetMsg();
+                if (msg.Key == 100)
+                {
+                    ErrorLabel.Content = JsonConvert.DeserializeObject<Dictionary<string, string>>(msg.Value)["message"];
+                    ErrorLabel.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    Dictionary<string, uint> resJson = JsonConvert.DeserializeObject<Dictionary<string, uint>>(msg.Value);
 
-                Dictionary<string, uint> resJson = JsonConvert.DeserializeObject<Dictionary<string, uint>>(msg.Value);
-                int i = 0;
+                    User.Is_admin = true;
+                    User.initRoom(json1["roomName"], resJson["roomId"], (uint)json2["maxUsers"], (uint)json2["questionCount"], (uint)json2["answerTimeout"]);
 
-                User.Is_admin = true;
-                User.initRoom(json1["roomName"], resJson["roomId"], (uint)json2["maxUsers"], (uint)json2["questionCount"], (uint)json2["answerTimeout"]);
-
-                RoomDataWinow roomDataWinow = new RoomDataWinow();
-                Close();
-                roomDataWinow.Show();
+                    RoomDataWinow roomDataWinow = new RoomDataWinow();
+                    Communicator.EndCommunicate = false;
+                    Close();
+                    roomDataWinow.Show();
+                }
             }
             // invalid input
             else

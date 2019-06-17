@@ -54,7 +54,7 @@ namespace ClientSide
             var mainResJson = JsonConvert.DeserializeObject<Dictionary<string, object>>(msg.Value);
             var v = mainResJson["rooms"].ToString();            
             var roomResJson = JsonConvert.DeserializeObject<Dictionary<string, object>>(v);
-            Room room;
+            Room room = new Room();
 
             if (roomResJson == null)
             {
@@ -67,7 +67,14 @@ namespace ClientSide
                 int j = 0;
                 foreach (var i in roomResJson.Keys)
                 {
-                    room = JsonConvert.DeserializeObject<Room>(roomResJson[i].ToString());
+                    var res = JsonConvert.DeserializeObject<Dictionary<string, string>>(roomResJson[i].ToString());
+                    room.Id =  Convert.ToUInt32(res["ID"]);
+                    room.Name =res["name"];
+                    room.TimePerQuestion = Convert.ToUInt32(res["timePerQuestion"]);
+                    room.Num_of_question = Convert.ToUInt32(res["numOfQustion"]);
+                    room.MsxPlayers = Convert.ToUInt32(res["maxPlayers"]);
+
+
                     allRooms.Add(room.Name, room);
                     this.RoomsList.Items.Add(room.Name);
                     j++;
