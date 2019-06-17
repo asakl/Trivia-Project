@@ -15,6 +15,11 @@ LoggedUser::LoggedUser(string name)
 	this->m_username = name;
 }
 
+LoggedUser::LoggedUser(const LoggedUser& other)
+{
+	this->m_username = other.m_username;
+}
+
 bool LoggedUser::operator==(LoggedUser other)
 {
 	return this->m_username == other.m_username;
@@ -27,7 +32,7 @@ LoggedUser::~LoggedUser()
 }
 
 //getter
-string LoggedUser::getUsername()
+string LoggedUser::getUsername() const 
 {
 	return this->m_username;
 }

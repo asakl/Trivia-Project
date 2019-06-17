@@ -1,5 +1,7 @@
 #include "MenuRequestHandler.h"
 
+void* watcher = nullptr;
+
 
 MenuRequestHandler::MenuRequestHandler()
 {
@@ -76,9 +78,12 @@ RequestResult MenuRequestHandler::createRoom(Request r)
 	req = JsonRequestPacketDeserializer::deserializeCreateRoomRequest(r.buffer);
 	
 	vector<RoomData> rooms = this->m_roomManager->getRoomsData();
-	for (auto i : rooms)
+	this->m_user = LoggedUser(req.username);
+
+
+	for (auto curr : rooms)
 	{
-		if (i.name == req.roomName)
+		if (curr.name == req.roomName)
 		{
 			exist = true;
 			break;
@@ -126,6 +131,8 @@ RequestResult MenuRequestHandler::joinRoom(Request r)
 
 	 resp.status = TRIVIA_OK;
 	 
+	 watcher = (void*)&this->m_user;
+
 	 //Try to add the user.
 	 if (!this->m_roomManager->addUserToRoom(this->m_user, req.roomId))
 	 {
@@ -154,6 +161,8 @@ RequestResult MenuRequestHandler::getPlayersInRoom(Request r)
 
 	//Get the vecotr of users
 	vector<LoggedUser> users =  this->m_roomManager->getRoom(req.roomId).getAllUsers();
+
+	cout << this->m_roomManager->getRoom(req.roomId).getRoomData().name << endl;
 
 	//get all the usernames from the vector of users.
 

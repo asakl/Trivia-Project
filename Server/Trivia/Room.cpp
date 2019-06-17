@@ -13,6 +13,8 @@ Room::Room(RoomData metadata)
 */
 bool Room::addUser(const LoggedUser user)
 {
+	
+
 	//Adds the user, only if there is place left.
 	if (this->m_metadata.maxPlayers > (unsigned int)this->m_users.size())
 	{

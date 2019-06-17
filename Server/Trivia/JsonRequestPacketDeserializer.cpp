@@ -70,7 +70,7 @@ output: GetPlayersInRoomRequest
 */
 GetPlayersInRoomRequest JsonRequestPacketDeserializer::deserializeGetPlayersRequest(vector<Byte> buffer)
 {
-	GetPlayersInRoomRequest ret;
+	GetPlayersInRoomRequest ret = { 0 };
 	json j;
 
 	j = json::parse(Helper::getDictPartOfMessage(buffer));
@@ -109,7 +109,8 @@ CreateRoomRequest JsonRequestPacketDeserializer::deserializeCreateRoomRequest(ve
 	ret.maxUsers = j[MAX_USERS_KEY].get<int>();
 	ret.questionCount = j[QUESTION_COUNT_KEY].get<int>();
 	ret.roomName = j[ROOM_NAME_KEY].get<string>();
-	
+
+	ret.username = j[USER_KEY].get<string>();
 	return ret;
 }
 

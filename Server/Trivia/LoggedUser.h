@@ -10,7 +10,8 @@ class LoggedUser
 public:
 	LoggedUser();
 	LoggedUser(string name);
-	string getUsername();
+	LoggedUser(const LoggedUser& other);
+	string getUsername() const;
 	
 
 	bool operator==(LoggedUser other);

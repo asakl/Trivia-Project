@@ -52,6 +52,7 @@ typedef struct JoinRoomRequest
 typedef struct CreateRoomRequest
 {
 	string roomName;
+	string username;
 	unsigned int maxUsers;
 	unsigned int questionCount;
 	unsigned int answerTimeout;
