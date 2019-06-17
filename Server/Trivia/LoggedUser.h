@@ -8,7 +8,8 @@ class LoggedUser
 {
 
 public:
-	LoggedUser(string name = "unknown");
+	LoggedUser();
+	LoggedUser(string name);
 	string getUsername();
 	
 

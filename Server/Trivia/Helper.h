@@ -15,6 +15,7 @@
 #define MAX_PLAYERS "maxPlayers"
 #define NAME "name"
 #define TIME_PER_QUESTION "timePerQuestion"
+#define QUESTION_NUM "numOfQustion"
 
 #define DATA "data"
 

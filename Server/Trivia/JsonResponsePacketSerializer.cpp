@@ -158,7 +158,7 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(GetPlayersInRoomRe
 	json j;
 
 	//adds the players vector to the json
-	j[PLAYERS] = Helper::vectorToJson(response.players).dump();
+	j[PLAYERS] = response.players; //Helper::vectorToJson(response.players).dump();
 
 	buffer = Helper::toBytes(j.dump());
 	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
@@ -176,7 +176,7 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(CloseRoomResponse 
 	buffer = Helper::toBytes(j.dump());
 	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
 
-	response.responseLength = buffer.size();
+	response.responseLength = (unsigned int)buffer.size();
 
 	return buffer;
 }

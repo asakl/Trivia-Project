@@ -4,6 +4,11 @@
 i dont think comments are necessary
 */
 
+LoggedUser::LoggedUser()
+{
+	this->m_username = "unknown";
+}
+
 //C'tor
 LoggedUser::LoggedUser(string name)
 {

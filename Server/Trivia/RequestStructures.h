@@ -13,35 +13,42 @@ typedef struct Request
 	vector<Byte> buffer;
 
 }Request;
+
 typedef struct LoginRequest
 {
 	string password;
 	string username;
 }LoginRequest;
+
 typedef struct SignupRequest
 {
 	string username;
 	string password;
 	string email;
 }SignupRequest;
+
 typedef struct LogoutRequest
 {
 	string username;
-};
+}LogoutRequest;
+
 typedef struct RequestResult
 {
 	vector<Byte> response;
 	string msg;
 	IRequestHandler* newHandler;
-} RequestResult;
+}RequestResult;
+
 typedef struct GetPlayersInRoomRequest
 {
 	unsigned int roomId;
 } GetPlayersInRoomRequest;
+
 typedef struct JoinRoomRequest
 {
 	unsigned int roomId;
 }JoinRoomRequest;
+
 typedef struct CreateRoomRequest
 {
 	string roomName;
@@ -49,22 +56,27 @@ typedef struct CreateRoomRequest
 	unsigned int questionCount;
 	unsigned int answerTimeout;
 }CreateRoomRequest;
+
 typedef struct GetRoomsRequest
 {
 	unsigned int status;
 }GetRoomsRequest;
+
 typedef struct CloseRoomRequest
 {
 	unsigned int status;
 }CloseRoomRequest;
+
 typedef struct StartGameRequest
 {
 	unsigned int status;
 }StartGameRequest;
+
 typedef struct GetRoomStateRequest
 {
 	unsigned int status;
 }GetRoomStateRequest;
+
 typedef struct LeaveRoomRequset
 {
 	unsigned int status;

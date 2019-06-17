@@ -3,7 +3,6 @@
 
 MenuRequestHandler::MenuRequestHandler()
 {
-	
 }
 
 MenuRequestHandler::MenuRequestHandler(RoomManager* rm)
@@ -71,26 +70,47 @@ RequestResult MenuRequestHandler::createRoom(Request r)
 	RoomData metadata;
 	CreateRoomRequest req;
 	CreateRoomResponse resp;
+	bool exist = false;
 
 	//Deserialize the request
 	req = JsonRequestPacketDeserializer::deserializeCreateRoomRequest(r.buffer);
 	
+	vector<RoomData> rooms = this->m_roomManager->getRoomsData();
+	for (auto i : rooms)
+	{
+		if (i.name == req.roomName)
+		{
+			exist = true;
+			break;
+		}
+	}
 
-	//config the room
-	metadata.maxPlayers = req.maxUsers;
-	metadata.name = req.roomName;
-	metadata.timePerQuestion = req.answerTimeout;
-	metadata.isActive = false;
+	if (exist)
+	{
+		ErrorResponse err;
+		err.message = "error! there is room with this name...";
+		resp.status = ERROR_RESPONSE_ID;
+		result.response = JsonResponsePacketSerializer::serializerResponse(err);
+	}
+	else
+	{
+		//config the room
+		metadata.maxPlayers = req.maxUsers;
+		metadata.name = req.roomName;
+		metadata.timePerQuestion = req.answerTimeout;
+		metadata.numOfQuestion = req.questionCount;
+		metadata.isActive = false;
 
+		//creates the room.
+		resp.id = this->m_roomManager->createRoom(metadata, this->m_user);
 
+		resp.status = TRIVIA_OK;
+		result.response = JsonResponsePacketSerializer::serializerResponse(resp);
+	}
 
-	//creates the room.
-	resp.id = this->m_roomManager->createRoom(metadata, this->m_user);
-	
-	resp.status = TRIVIA_OK;
-	result.response = JsonResponsePacketSerializer::serializerResponse(resp);
 	result.newHandler = this;
-	
+
+
 	return result;
 }
 

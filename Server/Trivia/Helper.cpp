@@ -90,7 +90,7 @@ void Helper::sendData(SOCKET sc, std::string message)
 {
 	//define var
 	const char* data = message.c_str();
-	int status = send(sc, data, message.size(), 0);
+	int status = send(sc, data, (int)message.size(), 0);
 
 	cout << "Message sent to client " << sc << "." << endl;
 
@@ -110,7 +110,7 @@ output: none
 void Helper::sendData(SOCKET sc, vector<Byte> message)
 {
 	//send 
-	if (send(sc, (char*)(&message[0]), message.size(), 0) == INVALID_SOCKET)
+	if (send(sc, (char*)(&message[0]), (int)message.size(), 0) == INVALID_SOCKET)
 	{
 		//error!
 		throw std::exception("Error while sending message to client");
@@ -119,7 +119,7 @@ void Helper::sendData(SOCKET sc, vector<Byte> message)
 
 vector<Byte> Helper::toBytes(string msg)
 {
-	return Helper::toBytes(msg.c_str(), msg.size());
+	return Helper::toBytes(msg.c_str(), (int)msg.size());
 }
 
 /*
@@ -169,7 +169,7 @@ char* Helper::serializeFirstResponse(unsigned int status, unsigned int length)
 vector<Byte> Helper::msgToProtocol(vector<Byte> json, int code)
 {
 	vector<Byte> vec;
-	int size = json.size();
+	int size = (int)json.size();
 	
 	Byte codeByte(code);
 	int num = 0xff000000;
@@ -202,9 +202,10 @@ nlohmann::json Helper::vectorToJson(const vector<RoomData> vec)
 		//adds the data to the currentRoom
 		currentRoom[ID] = to_string(vec[i].id);
 		currentRoom[IS_ACTIVE] = to_string(vec[i].isActive);
-		currentRoom[MAX_PLAYERS] = vec[i].maxPlayers;
+		currentRoom[MAX_PLAYERS] = to_string(vec[i].maxPlayers);
 		currentRoom[NAME] = vec[i].name;
-		currentRoom[ID] = to_string(vec[i].timePerQuestion);
+		currentRoom[TIME_PER_QUESTION] = to_string(vec[i].timePerQuestion);
+		currentRoom[QUESTION_NUM] = to_string(vec[i].numOfQuestion);
 
 		//Adds the room to the json of rooms.
 		j[to_string(i)] = currentRoom.dump();

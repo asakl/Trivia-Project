@@ -34,5 +34,4 @@ public:
 	static vector<Byte> serializerResponse(StartGameResponse);
 	static vector<Byte> serializerResponse(GetRoomStateResponse);
 	static vector<Byte> serializerResponse(LeaveRoomResponse); 
-
 };
