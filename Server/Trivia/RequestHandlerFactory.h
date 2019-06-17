@@ -7,11 +7,11 @@
 #include "HighscoreTable.h"
 #include "MenuRequestHandler.h"
 #include "LoginRequestHandler.h"
-
+#include "RoomAdminRequestHandler.h"
 
 class LoginRequestHandler;
 class MenuRequestHandler;
-
+class RoomAdminRequestHandler;
 
 class RequestHandlerFactory
 {
@@ -19,8 +19,11 @@ public:
 	RequestHandlerFactory();
 	RequestHandlerFactory(IDatabase* db);
 	~RequestHandlerFactory();
+
 	LoginRequestHandler* createLoginRequestHandler();
 	MenuRequestHandler* createMenuRequestHandler();
+	RoomAdminRequestHandler* createRoomAdminRequestHandler(Request r);
+
 private:
 	LoginManager* m_loginManager;
 	LoginRequestHandler* globalLoginRquestHandler;

@@ -1,29 +1,3 @@
-﻿  Communicator.cpp
-C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\Trivia-Project\Server\Trivia\JsonRequestPacketDeserializer.h(22,2): warning C4091:  'static ': ignored on left of 'JsonRequestPacketDeserializer' when no variable is declared
-  HighscoreTable.cpp
-  LoggedUser.cpp
-  LoginManager.cpp
-  LoginRequestHandler.cpp
-C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\Trivia-Project\Server\Trivia\JsonResponsePacketSerializer.h(37,2): warning C4091:  'static ': ignored on left of 'JsonResponsePacketSerializer' when no variable is declared
-C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\Trivia-Project\Server\Trivia\JsonRequestPacketDeserializer.h(22,2): warning C4091:  'static ': ignored on left of 'JsonRequestPacketDeserializer' when no variable is declared
-  MenuRequestHandler.cpp
-C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\Trivia-Project\Server\Trivia\JsonResponsePacketSerializer.h(37,2): warning C4091:  'static ': ignored on left of 'JsonResponsePacketSerializer' when no variable is declared
-C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\Trivia-Project\Server\Trivia\JsonRequestPacketDeserializer.h(22,2): warning C4091:  'static ': ignored on left of 'JsonRequestPacketDeserializer' when no variable is declared
-  RequestHandlerFactory.cpp
-C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\Trivia-Project\Server\Trivia\JsonResponsePacketSerializer.h(37,2): warning C4091:  'static ': ignored on left of 'JsonResponsePacketSerializer' when no variable is declared
-C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\Trivia-Project\Server\Trivia\JsonRequestPacketDeserializer.h(22,2): warning C4091:  'static ': ignored on left of 'JsonRequestPacketDeserializer' when no variable is declared
-  Room.cpp
-  RoomAdminRequestHandler.cpp
-C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\Trivia-Project\Server\Trivia\JsonResponsePacketSerializer.h(37,2): warning C4091:  'static ': ignored on left of 'JsonResponsePacketSerializer' when no variable is declared
-C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\Trivia-Project\Server\Trivia\JsonRequestPacketDeserializer.h(22,2): warning C4091:  'static ': ignored on left of 'JsonRequestPacketDeserializer' when no variable is declared
-  RoomManager.cpp
-  Server.cpp
-C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\Trivia-Project\Server\Trivia\JsonResponsePacketSerializer.h(37,2): warning C4091:  'static ': ignored on left of 'JsonResponsePacketSerializer' when no variable is declared
-C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\Trivia-Project\Server\Trivia\JsonRequestPacketDeserializer.h(22,2): warning C4091:  'static ': ignored on left of 'JsonRequestPacketDeserializer' when no variable is declared
-  Source.cpp
-C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\Trivia-Project\Server\Trivia\JsonResponsePacketSerializer.h(37,2): warning C4091:  'static ': ignored on left of 'JsonResponsePacketSerializer' when no variable is declared
-C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\Trivia-Project\Server\Trivia\JsonRequestPacketDeserializer.h(22,2): warning C4091:  'static ': ignored on left of 'JsonRequestPacketDeserializer' when no variable is declared
-  SqliteDatabase.cpp
-  Generating Code...
-C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\Trivia-Project\Server\Trivia\JsonResponsePacketSerializer.h(37,2): warning C4091:  'static ': ignored on left of 'JsonResponsePacketSerializer' when no variable is declared
-  Trivia.vcxproj -> C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\Trivia-Project\Server\x64\Debug\Trivia.exe
+﻿  JsonRequestPacketDeserializer.cpp
+C:\GoogleDrive\Magshimim\cpp\15\trivia\Trivia-Project\Server\Trivia\JsonRequestPacketDeserializer.h(22,2): warning C4091:  'static ': ignored on left of 'JsonRequestPacketDeserializer' when no variable is declared
+  Trivia.vcxproj -> C:\GoogleDrive\Magshimim\cpp\15\trivia\Trivia-Project\Server\x64\Debug\Trivia.exe

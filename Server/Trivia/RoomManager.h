@@ -10,7 +10,7 @@ class RoomManager
 public:
 	RoomManager();
 	unsigned int createRoom(RoomData,LoggedUser);
-	void deleteRoom(unsigned int);
+	bool deleteRoom(unsigned int);
 	bool addUserToRoom(LoggedUser, unsigned int);
 	unsigned int getRoomState(unsigned int);
 	vector<RoomData> getRoomsData();

@@ -64,11 +64,13 @@ typedef struct GetRoomsRequest
 
 typedef struct CloseRoomRequest
 {
+	unsigned int roomId;
 	unsigned int status;
 }CloseRoomRequest;
 
 typedef struct StartGameRequest
 {
+	unsigned int roomId;
 	unsigned int status;
 }StartGameRequest;
 

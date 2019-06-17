@@ -125,11 +125,18 @@ GetRoomsRequest JsonRequestPacketDeserializer::deserializeGetRoomsRequest(vector
 
 CloseRoomRequest JsonRequestPacketDeserializer::deserializeCloseRoomRequest(vector<Byte> buffer)
 {
-	CloseRoomRequest ret;
+	CloseRoomRequest ret = { 0,0 };
 
 	auto j = json::parse(Helper::getDictPartOfMessage(buffer));
-	ret.status = j[STATUS].get<unsigned int>();
-
+	try
+	{
+		ret.roomId = j[ROOMID_KEY].get<unsigned int>();
+	}
+	catch (const std::exception& e)
+	{
+		cout << e.what() << endl;
+	}
+	
 	return ret;
 }
 

@@ -84,7 +84,7 @@ void Communicator::bindAndListen()
 	//define variable
 	struct sockaddr_in sockAddr = { 0 };
 
-	//"init" the server socket
+	//Config the server socket
 	sockAddr.sin_port = htons(PORT);
 	sockAddr.sin_family = AF_INET;
 	sockAddr.sin_addr.s_addr = 0000;
@@ -95,7 +95,7 @@ void Communicator::bindAndListen()
 		throw std::exception(__FUNCTION__ " - bind");
 	}
 
-	//listen
+	//listen to incoming messages.
 	if (listen(this->serverSocket, SOMAXCONN) == SOCKET_ERROR)
 	{
 		throw std::exception(__FUNCTION__ " - listen");
@@ -208,6 +208,11 @@ IRequestHandler* Communicator::sortRequest(Request req)
 	else if (MenuRequestHandler::isMenuRequest((unsigned int)req.id))
 	{
 		handler = (IRequestHandler*)this->m_handlerFactory->createMenuRequestHandler();
+	}
+
+	else if (RoomAdminRequestHandler::isRoomAdminRequest(req.id))
+	{
+		handler = (IRequestHandler*)this->m_handlerFactory->createRoomAdminRequestHandler(req);
 	}
 	
 	//if the id is not matching,return nullptr.

@@ -31,8 +31,20 @@ LoginRequestHandler* RequestHandlerFactory::createLoginRequestHandler()
 	return this->globalLoginRquestHandler;
 }
 
-//Creates a MenuRequestHandler
+//Create a MenuRequestHandler
 MenuRequestHandler* RequestHandlerFactory::createMenuRequestHandler()
 {
 	return new MenuRequestHandler(this->m_roomManager);
+}
+
+RoomAdminRequestHandler* RequestHandlerFactory::createRoomAdminRequestHandler(Request req)
+{
+	unsigned int roomId = -1;
+
+	if (req.id == CLOSE_ROOM_REQUEST)
+		roomId = JsonRequestPacketDeserializer::deserializeCloseRoomRequest(req.buffer).roomId;
+	else if (req.id == START_GAME_REQUEST)
+		roomId = JsonRequestPacketDeserializer::deserializeStartGameRequest(req.buffer).roomId;
+
+	return new RoomAdminRequestHandler((Room)this->m_roomManager->getRoom(roomId),this->m_roomManager);
 }

@@ -28,17 +28,18 @@ unsigned int RoomManager::createRoom(RoomData metadata,LoggedUser user)
 
 //the function delete room remove a room from the room map.
 //Input: id of the room to be deleted.
-//Output: None.
-void RoomManager::deleteRoom(unsigned int id)
+//Output: operation status.
+bool RoomManager::deleteRoom(unsigned int id)
 {
 	for (auto it = this->m_rooms.begin(); it != this->m_rooms.end(); it++)
 	{
 		if (it->first == id)
 		{
 			this->m_rooms.erase(it);
-			return;
+			return true;
 		}
 	}
+	return false;
 }
 
 //The function addUser adds the user to a room with the given id.
