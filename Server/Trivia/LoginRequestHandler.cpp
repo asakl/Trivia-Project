@@ -16,7 +16,7 @@ LoginRequestHandler::LoginRequestHandler(LoginManager* man)
 //is request is relevant?
 bool LoginRequestHandler::isRequestRelevant(Request request)
 {
-	return request.id == LOGIN_REQUEST_ID || request.id == SIGNUP_REQUEST_ID;
+	return request.id == LOGIN_REQUEST_ID || request.id == SIGNUP_REQUEST_ID || request.id == GET_HISCORES_ID || request.id == GET_MY_DATA;
 }
 
 /*
@@ -52,6 +52,14 @@ RequestResult LoginRequestHandler::handleRequest(Request request)
 	else if (SIGNOUT_ID == request.id)
 	{
 		this->logout(request);
+	}
+	else if (GET_HISCORES_ID == request.id)
+	{
+		ret = this->getHighscores(request);
+	}
+	else if (GET_MY_DATA == request.id)
+	{
+		ret = this->getStatus(request);
 	}
 
 	ret.newHandler = this;
@@ -157,3 +165,24 @@ RequestResult LoginRequestHandler::signup(Request r)
 	return ret;
 }
 
+RequestResult LoginRequestHandler::getHighscores(Request)
+{
+	RequestResult ret;
+	HighscoreResponse resp;
+
+	resp.highscores = this->m_loginManager->getHighscores();
+
+	//create signup result
+	resp.status = TRIVIA_OK;
+	ret.response = JsonResponsePacketSerializer::serializerResponse(resp);
+	ret.newHandler = this;
+	return ret;
+}
+
+RequestResult LoginRequestHandler::getStatus(Request)
+{
+	auto n = "asa";
+	auto a = this->m_loginManager->getStatus(n);
+
+	return RequestResult();
+}

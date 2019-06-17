@@ -20,6 +20,8 @@ public:
 	void login(string username, string password);
 	bool logout(LoggedUser);
 	bool doesUserExiste(string user);
+	vector<string> getHighscores();
+	map<string, double> getStatus(string name);
 
 private:
 	//The mutex signupLock locks every time signup is called, so 2 or more threads wont signup at the same time.

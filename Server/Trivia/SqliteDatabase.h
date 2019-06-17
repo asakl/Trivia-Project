@@ -17,7 +17,8 @@ public:
 	virtual bool open();
 	virtual void close();
 
-	virtual map<LoggedUser, int> getHighscores();
+	virtual map<string, int> getHighscores();
+	virtual map<string, double> getStatus(string name);
 	virtual bool doesUserExiste(const string);
 	virtual list<Question> getQuestions(const int);
 

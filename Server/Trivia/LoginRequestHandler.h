@@ -29,4 +29,7 @@ private:
 	RequestResult logout(Request);
 	RequestResult login(Request);
 	RequestResult signup(Request);
+	RequestResult getHighscores(Request);
+	RequestResult getStatus(Request);
+
 };

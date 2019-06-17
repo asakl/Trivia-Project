@@ -144,7 +144,7 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(HighscoreResponse 
 	//adds the status code to the json
 	j[STATUS] = to_string(response.status);
 	//adds the highscores to the json
-	j[HIGHSCORES] = Helper::vectorToJson(response.highscores).dump();
+	j[HIGHSCORES] = response.highscores;//Helper::vectorToJson(response.highscores).dump();
 
 	buffer = Helper::toBytes(j.dump());
 	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
