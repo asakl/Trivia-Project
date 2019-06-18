@@ -91,6 +91,7 @@ JoinRoomRequest JsonRequestPacketDeserializer::deserializeJoinRoomRequest(vector
 	j = json::parse(Helper::getDictPartOfMessage(buffer));
 
 	ret.roomId = j[ROOMID_KEY].get<int>();
+	ret.name = j[NAME].get<string>();
 
 	return ret;
 }

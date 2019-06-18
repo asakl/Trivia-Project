@@ -47,6 +47,7 @@ typedef struct GetPlayersInRoomRequest
 typedef struct JoinRoomRequest
 {
 	unsigned int roomId;
+	string name;
 }JoinRoomRequest;
 
 typedef struct CreateRoomRequest

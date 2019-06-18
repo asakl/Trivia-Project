@@ -44,9 +44,6 @@ RequestResult MenuRequestHandler::handleRequest(Request r)
 		case GET_ROOMS_REQUEST:
 			ret = this->getRooms(r);
 			break;
-		case GET_HISCORES_REQUEST:
-			//TODO
-			break;
 		default:
 			ErrorResponse er;
 			er.message = "Request ID invalid";
@@ -134,7 +131,7 @@ RequestResult MenuRequestHandler::joinRoom(Request r)
 	 watcher = (void*)&this->m_user;
 
 	 //Try to add the user.
-	 if (!this->m_roomManager->addUserToRoom(this->m_user, req.roomId))
+	 if (!this->m_roomManager->addUserToRoom(req.name, req.roomId))
 	 {
 		 //Failed to add the user. Change status accordingly.
 		 resp.status = ERROR_RESPONSE_ID;
