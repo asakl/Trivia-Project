@@ -26,9 +26,9 @@ public:
 	virtual void signup(string, string, string);
 	virtual LoggedUser * login(string, string);
 	virtual void logout(string, string);
+	virtual void updateUserScore(string name, int correct, int worng, double avg) override;
 
 private:
 	sqlite3 * db;
-
 };
 

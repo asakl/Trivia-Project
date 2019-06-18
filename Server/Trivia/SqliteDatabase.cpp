@@ -148,9 +148,6 @@ SqliteDatabase::SqliteDatabase()
 		sql = "CREATE TABLE Game ( game_id INTEGER, status INTEGER, start_time TEXT, end_time TEXT, PRIMARY KEY(game_id)); ";
 		sqlite3_exec(this->db, sql.c_str(), NULL, NULL, &errorMsg);
 
-		sql = "CREATE TABLE HighScores ( id INTEGER, score INTEGER, name TEXT, PRIMARY KEY(id)); ";
-		sqlite3_exec(this->db, sql.c_str(), NULL, NULL, &errorMsg);
-
 		sql = "CREATE TABLE UserScores ( name TEXT, avgTime FLOAT, correct INT, worng INT, games INT, PRIMARY KEY(name)); ";
 		sqlite3_exec(this->db, sql.c_str(), NULL, NULL, &errorMsg);
 	}
@@ -215,7 +212,7 @@ map<string, int> SqliteDatabase::getHighscores()
 	char* errorMsg = nullptr;
 	map<string, int> topThree;
 	//map<string, int>()
-	std::string sql("select * from Highscores order by score desc limit 3;");
+	std::string sql("select name, correct from UserScores order by correct desc limit 3;");
 	//do sql
 	sqlite3_exec(this->db, sql.c_str(), getHighCallback, &topThree, &errorMsg);
 
@@ -309,4 +306,17 @@ LoggedUser* SqliteDatabase::login(string name, string pass)
 void SqliteDatabase::logout(string name, string pass)
 {
 	// TODO
+	// TODO
+	// TODO TODO TODO TODO TODOOOOOOOOOOOO
+	// DO DO DO DO
+}
+
+void SqliteDatabase::updateUserScore(string name, int correct, int worng, double avg)
+{
+	char* errorMsg = nullptr;
+	std::string sql("update UserScores set games = games + 1, correct = correct + " +
+		to_string(correct) + ", worng = worng + " + to_string(worng) +
+		"avgTime = (case avgTime when 0 then " + to_string(avg) +
+		"else (avgTime + " + to_string(avg) + ")/2 end)" + " where name = '" + name + "';");
+	sqlite3_exec(this->db, sql.c_str(), NULL, NULL, &errorMsg);
 }
