@@ -226,7 +226,7 @@ map<string, double> SqliteDatabase::getStatus(string name)
 {
 	char* errorMsg = nullptr;
 	map<string, double> data;
-	std::string sql("select * from UserScores where username = '" + name + "';");
+	std::string sql("select * from UserScores where name = '" + name + "';");
 	sqlite3_exec(this->db, sql.c_str(), getStatusCallback, &data, &errorMsg);
 	return data;
 }
@@ -277,6 +277,8 @@ void SqliteDatabase::signup(string name, string pass, string email)
 	//define vars and do sql
 	char* errorMsg = nullptr;
 	std::string sql("insert into User (username, pass, email) values ('" + name + "', '" + pass + "', '" + email + "');");
+	sqlite3_exec(this->db, sql.c_str(), NULL, NULL, &errorMsg);
+	sql = ("insert into UserScores (name, avgTime, correct, worng, games) values ('" + name + "', 0, 0, 0, 0);");
 	sqlite3_exec(this->db, sql.c_str(), NULL, NULL, &errorMsg);
 }
 

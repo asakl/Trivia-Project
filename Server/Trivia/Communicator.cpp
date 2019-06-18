@@ -202,7 +202,7 @@ IRequestHandler* Communicator::sortRequest(Request req)
 	IRequestHandler* handler = nullptr;	
 	bool whatRequest = false;
 
-	if (LOGIN_REQUEST_ID == req.id || (unsigned int)SIGNUP_ID == req.id)
+	if (LOGIN_REQUEST_ID == req.id || (unsigned int)SIGNUP_ID == req.id || req.id == GET_HISCORES_ID || req.id == GET_MY_DATA)
 		handler = (IRequestHandler*)this->m_handlerFactory->createLoginRequestHandler();
 
 	else if (MenuRequestHandler::isMenuRequest((unsigned int)req.id))

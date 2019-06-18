@@ -102,5 +102,10 @@ typedef struct LeaveRoomResponse
 	unsigned int responseLength;
 }LeaveRoomResponse;
 
-
+typedef struct GetStatusResponse
+{
+	unsigned int status;
+	map<string, double> data;
+	unsigned int responseLength;
+}GetStatusResponse;
 

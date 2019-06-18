@@ -84,3 +84,8 @@ typedef struct LeaveRoomRequset
 {
 	unsigned int status;
 }LeaveRoomRequset;
+
+typedef struct GetStatusRequest
+{
+	string username;
+}GetStatusRequest;

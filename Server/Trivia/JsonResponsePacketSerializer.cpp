@@ -224,6 +224,22 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(LeaveRoomResponse 
 	return buffer;
 }
 
+vector<Byte> JsonResponsePacketSerializer::serializerResponse(GetStatusResponse response)
+{
+	vector<Byte> buffer;
+	json j;
+
+	for (auto i : response.data)
+	{
+		j[i.first] = i.second;
+	}
+
+	buffer = Helper::toBytes(j.dump());
+	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
+
+	return buffer;
+}
+
 
 
 

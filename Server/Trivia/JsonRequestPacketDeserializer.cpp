@@ -30,8 +30,6 @@ SignupRequest JsonRequestPacketDeserializer::deserializeSignupRequest(vector<Byt
 	//string of dict/json into json object
 	auto j = json::parse(Helper::getDictPartOfMessage(buffer));
 	
-	
-
 	//get request vals
 	ret.email = j[EMAIL_KEY].get<string>();
 	ret.username = j[USER_KEY].get<string>();
@@ -180,5 +178,16 @@ LogoutRequest JsonRequestPacketDeserializer::deserializeLogoutRequest(vector<Byt
 
 	ret.username = j[USER_KEY].get<string>();
 	
+	return ret;
+}
+
+GetStatusRequest JsonRequestPacketDeserializer::deserializeStatusRequest(vector<Byte> buffer)
+{
+	GetStatusRequest ret;
+
+	auto j = json::parse(Helper::getDictPartOfMessage(buffer));
+
+	ret.username = j[USER_KEY].get<string>();
+
 	return ret;
 }

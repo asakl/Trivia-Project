@@ -179,10 +179,26 @@ RequestResult LoginRequestHandler::getHighscores(Request)
 	return ret;
 }
 
-RequestResult LoginRequestHandler::getStatus(Request)
+RequestResult LoginRequestHandler::getStatus(Request r)
 {
-	auto n = "asa";
-	auto a = this->m_loginManager->getStatus(n);
+	RequestResult ret;
+	GetStatusRequest deserialized = JsonRequestPacketDeserializer::deserializeStatusRequest(r.buffer);
+	GetStatusResponse resp;
 
-	return RequestResult();
+	 resp.data = this->m_loginManager->getStatus(deserialized.username);
+
+	 if (resp.data.size() > 0)
+	 {
+		 resp.status = TRIVIA_OK;
+		 ret.response = JsonResponsePacketSerializer::serializerResponse(resp);
+	 }
+	 else
+	 {
+		 ErrorResponse err;
+		 err.message = "some error with db";
+		 ret.response = JsonResponsePacketSerializer::serializerResponse(err);
+	 }
+	
+	ret.newHandler = this;
+	return ret;
 }
