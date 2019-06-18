@@ -60,7 +60,7 @@ RequestResult MenuRequestHandler::handleRequest(Request r)
 
 bool MenuRequestHandler::isMenuRequest(unsigned int id)
 {
-	return JOIN_ROOM_REQUEST == id || CREATE_ROOM_REQUEST == id || GET_PLAYERS_REQUEST == id || JOIN_ROOM_REQUEST == id || CREATE_ROOM_REQUEST == id || SIGNOUT_REQUEST == id || GET_ROOMS_REQUEST == id || GET_HISCORES_REQUEST == id;
+	return JOIN_ROOM_REQUEST == id || CREATE_ROOM_REQUEST == id || GET_PLAYERS_REQUEST == id || JOIN_ROOM_REQUEST == id || CREATE_ROOM_REQUEST == id || SIGNOUT_REQUEST == id || GET_ROOMS_REQUEST == id;
 }
 
 //The function createRoom recive a request and create a room by the request configs.

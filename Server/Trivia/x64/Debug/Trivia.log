@@ -1,26 +1,4 @@
-﻿  Communicator.cpp
+﻿  HighscoreTable.cpp
 C:\Users\user\Documents\magshimim\year 2\cpp class\Trivia\Server\Trivia\JsonRequestPacketDeserializer.h(23,2): warning C4091:  'static ': ignored on left of 'JsonRequestPacketDeserializer' when no variable is declared
-  HighscoreTable.cpp
-  LoginManager.cpp
-  LoginRequestHandler.cpp
-C:\Users\user\Documents\magshimim\year 2\cpp class\Trivia\Server\Trivia\JsonResponsePacketSerializer.h(38,2): warning C4091:  'static ': ignored on left of 'JsonResponsePacketSerializer' when no variable is declared
-C:\Users\user\Documents\magshimim\year 2\cpp class\Trivia\Server\Trivia\JsonRequestPacketDeserializer.h(23,2): warning C4091:  'static ': ignored on left of 'JsonRequestPacketDeserializer' when no variable is declared
-  MenuRequestHandler.cpp
-C:\Users\user\Documents\magshimim\year 2\cpp class\Trivia\Server\Trivia\JsonResponsePacketSerializer.h(38,2): warning C4091:  'static ': ignored on left of 'JsonResponsePacketSerializer' when no variable is declared
-C:\Users\user\Documents\magshimim\year 2\cpp class\Trivia\Server\Trivia\JsonRequestPacketDeserializer.h(23,2): warning C4091:  'static ': ignored on left of 'JsonRequestPacketDeserializer' when no variable is declared
-  RequestHandlerFactory.cpp
-C:\Users\user\Documents\magshimim\year 2\cpp class\Trivia\Server\Trivia\JsonResponsePacketSerializer.h(38,2): warning C4091:  'static ': ignored on left of 'JsonResponsePacketSerializer' when no variable is declared
-C:\Users\user\Documents\magshimim\year 2\cpp class\Trivia\Server\Trivia\JsonRequestPacketDeserializer.h(23,2): warning C4091:  'static ': ignored on left of 'JsonRequestPacketDeserializer' when no variable is declared
-  RoomAdminRequestHandler.cpp
-C:\Users\user\Documents\magshimim\year 2\cpp class\Trivia\Server\Trivia\JsonResponsePacketSerializer.h(38,2): warning C4091:  'static ': ignored on left of 'JsonResponsePacketSerializer' when no variable is declared
-C:\Users\user\Documents\magshimim\year 2\cpp class\Trivia\Server\Trivia\JsonRequestPacketDeserializer.h(23,2): warning C4091:  'static ': ignored on left of 'JsonRequestPacketDeserializer' when no variable is declared
-  Server.cpp
-C:\Users\user\Documents\magshimim\year 2\cpp class\Trivia\Server\Trivia\JsonResponsePacketSerializer.h(38,2): warning C4091:  'static ': ignored on left of 'JsonResponsePacketSerializer' when no variable is declared
-C:\Users\user\Documents\magshimim\year 2\cpp class\Trivia\Server\Trivia\JsonRequestPacketDeserializer.h(23,2): warning C4091:  'static ': ignored on left of 'JsonRequestPacketDeserializer' when no variable is declared
-  Source.cpp
-C:\Users\user\Documents\magshimim\year 2\cpp class\Trivia\Server\Trivia\JsonResponsePacketSerializer.h(38,2): warning C4091:  'static ': ignored on left of 'JsonResponsePacketSerializer' when no variable is declared
-C:\Users\user\Documents\magshimim\year 2\cpp class\Trivia\Server\Trivia\JsonRequestPacketDeserializer.h(23,2): warning C4091:  'static ': ignored on left of 'JsonRequestPacketDeserializer' when no variable is declared
-  SqliteDatabase.cpp
-  Generating Code...
 C:\Users\user\Documents\magshimim\year 2\cpp class\Trivia\Server\Trivia\JsonResponsePacketSerializer.h(38,2): warning C4091:  'static ': ignored on left of 'JsonResponsePacketSerializer' when no variable is declared
   Trivia.vcxproj -> C:\Users\user\Documents\magshimim\year 2\cpp class\Trivia\Server\x64\Debug\Trivia.exe

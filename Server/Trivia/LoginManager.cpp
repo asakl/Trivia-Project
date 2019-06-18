@@ -97,19 +97,3 @@ bool LoginManager::doesUserExiste(string user)
 {
 	return this->m_database->doesUserExiste(user);
 }
-
-std::vector<string> LoginManager::getHighscores()
-{
-	auto top = this->m_database->getHighscores();
-	vector<string> vec;
-	for (auto i : top)
-	{
-		vec.push_back(i.first);
-	}
-	return vec;
-}
-
-map<string, double> LoginManager::getStatus(string name)
-{
-	return this->m_database->getStatus(name);
-}
