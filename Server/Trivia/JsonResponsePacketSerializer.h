@@ -16,6 +16,12 @@ using nlohmann::json;
 #define ANSWER_COUNT "answerCount"
 #define MESSAGE "message"
 #define ROOM_ID "roomId"
+#define CORRECT "correctAns"
+#define QUESTION "question"
+#define ANSWERS "answers"
+#define AVG_TIME "avgTime"
+#define WRONG_ANS "wrongAnswers"
+#define CORRECT_ANS "correctAnswers"
 
 static class JsonResponsePacketSerializer
 {
@@ -35,4 +41,8 @@ public:
 	static vector<Byte> serializerResponse(GetRoomStateResponse);
 	static vector<Byte> serializerResponse(LeaveRoomResponse); 
 	static vector<Byte> serializerResponse(GetStatusResponse);
+
+	static vector<Byte> serializerResponse(GetGameResultsResponse);
+	static vector<Byte> serializerResponse(SubmitAnswerResponse);
+	static vector<Byte> serializerResponse(GetQuestionResponse);
 };

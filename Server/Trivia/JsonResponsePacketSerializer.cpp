@@ -240,6 +240,49 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(GetStatusResponse 
 	return buffer;
 }
 
+vector<Byte> JsonResponsePacketSerializer::serializerResponse(GetGameResultsResponse response)
+{
+	vector<Byte> buffer;
+	json j, miniJson;
+
+	for (auto i : response.results)
+	{
+		miniJson[AVG_TIME] = i.avrageAnswerTime;
+		miniJson[CORRECT_ANS]= i.correctAnswersCount;
+		miniJson[WRONG_ANS]=i.wrongAnswersCount;
+		j[i.username] = miniJson.dump();
+	}
+
+	buffer = Helper::toBytes(j.dump());
+	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
+	return buffer;
+}
+
+vector<Byte> JsonResponsePacketSerializer::serializerResponse(SubmitAnswerResponse response)
+{
+	vector<Byte> buffer;
+	json j;
+	
+	j[CORRECT] = response.correctAnswerId;
+
+	buffer = Helper::toBytes(j.dump());
+	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
+	return buffer;
+}
+
+vector<Byte> JsonResponsePacketSerializer::serializerResponse(GetQuestionResponse response)
+{
+	vector<Byte> buffer;
+	json j;
+
+	j[QUESTION] = response.question;
+	j[ANSWERS] = response.answers;
+
+	buffer = Helper::toBytes(j.dump());
+	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
+	return buffer;
+}
+
 
 
 
