@@ -15,6 +15,7 @@ using namespace nlohmann;
 #define QUESTION_COUNT_KEY "questionCount"
 #define ROOM_NAME_KEY "roomName"
 #define STATUS "status"
+#define ANSWER "answer"
 
 /*
 the function deserialize from vector of bytes into signup request
@@ -189,6 +190,17 @@ GetStatusRequest JsonRequestPacketDeserializer::deserializeStatusRequest(vector<
 	auto j = json::parse(Helper::getDictPartOfMessage(buffer));
 
 	ret.username = j[USER_KEY].get<string>();
+
+	return ret;
+}
+
+SubmitAnswerRequet JsonRequestPacketDeserializer::deserializeSubmitAnswerRequest(vector<Byte> buffer)
+{
+	SubmitAnswerRequet ret;
+
+	auto j = json::parse(Helper::getDictPartOfMessage(buffer));
+	
+	ret.answerId = j[ANSWER].get<unsigned int>();
 
 	return ret;
 }

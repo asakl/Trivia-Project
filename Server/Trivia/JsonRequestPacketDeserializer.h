@@ -20,4 +20,5 @@ public:
 	static LeaveRoomRequset deserializeLeaveRoomRequset(vector<Byte> buffer);
 	static LogoutRequest deserializeLogoutRequest(vector<Byte> buffer);
 	static GetStatusRequest deserializeStatusRequest(vector<Byte> buffer);
+	static SubmitAnswerRequet deserializeSubmitAnswerRequest(vector<Byte> buffer);
 };

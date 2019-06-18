@@ -90,3 +90,8 @@ typedef struct GetStatusRequest
 {
 	string username;
 }GetStatusRequest;
+
+typedef struct SubmitAnswerRequet
+{
+	unsigned int answerId;
+}SubmitAnswerRequet;
