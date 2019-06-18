@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
 
 namespace ClientSide
 {
@@ -25,6 +26,7 @@ namespace ClientSide
         {
             InitializeComponent();
             this.UsernameLabel.Content = name;
+            GetStatus();
         }
 
         /// <summary>
@@ -43,6 +45,18 @@ namespace ClientSide
 
         private void GetStatus()
         {
+            Dictionary<string, string> json = new Dictionary<string, string>();
+            json.Add("username", User.Username);
+            string jsonString = JsonConvert.SerializeObject(json);
+            byte[] arr = Helper.SerializeMsg(jsonString, 17);
+            Communicator.SendMsg(arr, arr.Length);
+            KeyValuePair<int, string> msg = Communicator.GetMsg();
+            Dictionary<string, double> data = JsonConvert.DeserializeObject<Dictionary<string, double>>(msg.Value);
+
+            GamesLabel.Content = GamesLabel.Content + " " + data["games"];
+            RightLabel.Content = RightLabel.Content + " " + data["correct"];
+            WrongLabel.Content = WrongLabel.Content + " " + data["worng"];
+            TimeLabel.Content = TimeLabel.Content + " " + data["avgTime"];
         }
 
         //the user click 'close'
