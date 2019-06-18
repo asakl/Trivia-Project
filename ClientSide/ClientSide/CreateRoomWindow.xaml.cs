@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Newtonsoft.Json;
 
 namespace ClientSide
@@ -26,6 +15,7 @@ namespace ClientSide
         {
             InitializeComponent();
 
+            // for now, default vals
             this.RoomsInput.Text = "room_name";
             this.TimeInput.Text = "5";
             this.NumPlayersInput.Text = "2";
@@ -46,25 +36,25 @@ namespace ClientSide
             mainWindow.Show();
         }
 
-        //the user click 'close'
+        // the user click 'close'
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            //stop the default closing
+            // stop the default closing
             e.Cancel = true;
 
-            //return to main window
+            // fin communicate
             Communicator.Finish();
 
-            //close curr window
+            // close curr window
             e.Cancel = false;
         }
 
         /// <summary>
         /// the func add key and val to dict and check if the val is valid
         /// </summary>
-        /// <param name="dict"></param>
-        /// <param name="key"></param>
-        /// <param name="val"></param>
+        /// <param name="dict"> json dict </param>
+        /// <param name="key"> key </param>
+        /// <param name="val"> val </param>
         /// <param name="b"> will be false if the val is str that not a num </param>
         /// <returns> if the val is empty </returns>
         private bool AddToJson(Dictionary<string, int> dict, string key, string val, ref bool b)
@@ -99,14 +89,16 @@ namespace ClientSide
             bool validInput = true;
             bool num = true;
 
-            // make two dicts of msg
+            // make two dicts of msg, because we have strings and ints...
+            // json1 is <string string>
+            // json2 is <string int>
+
+            //get inputs into json
             validInput &= Helper.AddToJson(json1, "roomName", this.RoomsInput.GetLineText(0));
             validInput &= AddToJson(json2, "questionCount", this.NumPlayersInput.GetLineText(0), ref num);
             validInput &= AddToJson(json2, "maxUsers", this.NumQuestionsInput.GetLineText(0), ref num);
             validInput &= AddToJson(json2, "answerTimeout", this.TimeInput.GetLineText(0), ref num);
             validInput &= Helper.AddToJson(json1, "username", User.Username);
-
-
 
             // all input is valid?
             if (validInput)
@@ -114,27 +106,36 @@ namespace ClientSide
                 // hide error label
                 this.ErrorLabel.Visibility = Visibility.Hidden;
 
-                // create msg
+                // create msg:
+                // convert the dicts into json strings 
                 string jsonString1 = JsonConvert.SerializeObject(json1);
                 string jsonString2 = JsonConvert.SerializeObject(json2);
+                // add the two json strings
                 string jsonString = Helper.AddTwoJson(jsonString1, jsonString2);
+                // get byte array of json msg
                 byte[] arr = Helper.SerializeMsg(jsonString, 5);
 
                 // send and get res
                 Communicator.SendMsg(arr, arr.Length);
                 KeyValuePair<int, string> msg = Communicator.GetMsg();
+
+                // error?
                 if (msg.Key == 100)
                 {
+                    // print error msg
                     ErrorLabel.Content = JsonConvert.DeserializeObject<Dictionary<string, string>>(msg.Value)["message"];
                     ErrorLabel.Visibility = Visibility.Visible;
                 }
                 else
                 {
+                    // get the room data 
                     Dictionary<string, uint> resJson = JsonConvert.DeserializeObject<Dictionary<string, uint>>(msg.Value);
 
+                    // make the user admin and init room
                     User.Is_admin = true;
                     User.initRoom(json1["roomName"], resJson["roomId"], (uint)json2["maxUsers"], (uint)json2["questionCount"], (uint)json2["answerTimeout"]);
 
+                    // open room data window and close this
                     RoomDataWinow roomDataWinow = new RoomDataWinow();
                     Communicator.EndCommunicate = false;
                     Close();

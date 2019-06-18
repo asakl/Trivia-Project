@@ -24,9 +24,9 @@ namespace ClientSide
             byte b = (byte)code;
             
             // make byte list 
-            l.Add(b);
-            l.AddRange(BitConverter.GetBytes(msg.Length).Reverse());
-            l.AddRange(Encoding.UTF8.GetBytes(msg));
+            l.Add(b); // add code
+            l.AddRange(BitConverter.GetBytes(msg.Length).Reverse()); // add size and reverse because little endian
+            l.AddRange(Encoding.UTF8.GetBytes(msg)); // add json string
 
             // return byte arr
             return l.ToArray();
@@ -40,8 +40,9 @@ namespace ClientSide
         /// <returns> one json str </returns>
         static public string AddTwoJson(string json1, string json2)
         {
-            string res = json1.Replace("}", ",");
-            res += json2.Replace("{", " ");
+            // {....}{....}
+            string res = json1.Replace("}", ","); // {....,{....}
+            res += json2.Replace("{", " "); // {...., ....}
             return res;
         }
 

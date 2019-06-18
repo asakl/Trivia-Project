@@ -1,17 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Animation;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Newtonsoft.Json;
 using System.ComponentModel;
 
@@ -37,13 +28,14 @@ namespace ClientSide
         private void Refresh()
         {
             // define vars
-            //RoomsList.SelectedIndex = -1;
             RoomsList.Items.Clear();
             allRooms.Clear();
 
+            // hide the users in rooms
             User_Label.Visibility = Visibility.Hidden;
             PlayerList.Visibility = Visibility.Hidden;
 
+            // create msg
             string jsonString = "{\"status\": 7}";
             byte[] arr = Helper.SerializeMsg(jsonString,7);
 
@@ -51,33 +43,38 @@ namespace ClientSide
             Communicator.SendMsg(arr, arr.Length);
             KeyValuePair<int, string> msg = Communicator.GetMsg();
 
+            // get room list
             var mainResJson = JsonConvert.DeserializeObject<Dictionary<string, object>>(msg.Value);
             var v = mainResJson["rooms"].ToString();            
-            var roomResJson = JsonConvert.DeserializeObject<Dictionary<string, object>>(v);
-            Room room = new Room();
+            var roomResJson = JsonConvert.DeserializeObject<Dictionary<string, object>>(v); // get rooms 
 
+            // there no rooms
             if (roomResJson == null)
             {
+                // show error label
                 this.ErrorLabel.Visibility = Visibility.Visible;
                 Storyboard sb = Resources["sbHideAnimation"] as Storyboard;
                 sb.Begin(ErrorLabel);
             }
             else
             {
-                int j = 0;
+                // for all the rooms
                 foreach (var i in roomResJson.Keys)
                 {
+                    // add room to list of names and to list of rooms
+                    Room room = new Room();
+                    // get room json
                     var res = JsonConvert.DeserializeObject<Dictionary<string, string>>(roomResJson[i].ToString());
+                    // get room info
                     room.Id =  Convert.ToUInt32(res["ID"]);
                     room.Name =res["name"];
                     room.TimePerQuestion = Convert.ToUInt32(res["timePerQuestion"]);
                     room.Num_of_question = Convert.ToUInt32(res["numOfQustion"]);
                     room.MsxPlayers = Convert.ToUInt32(res["maxPlayers"]);
 
-
+                    // add to lists
                     allRooms.Add(room.Name, room);
                     this.RoomsList.Items.Add(room.Name);
-                    j++;
                 }
             }
 
@@ -117,19 +114,29 @@ namespace ClientSide
             // show the players in the room
             if (RoomsList.Items.Count > 0)
             {
+                // show users in room and 
                 User_Label.Visibility = Visibility.Visible;
                 PlayerList.Visibility = Visibility.Visible;
 
                 // get the players
+                // create msg
                 Dictionary<string, int> json = new Dictionary<string, int>();
+
+                // make json
                 json.Add("roomId", (int)allRooms[RoomsList.SelectedItem.ToString()].Id);
                 string jsonString = JsonConvert.SerializeObject(json);
+
+                // make json to bytes
                 byte[] arr = Helper.SerializeMsg(jsonString, 3);
+
+                // send msg and get res
                 Communicator.SendMsg(arr, arr.Length);
                 KeyValuePair<int, string> msg = Communicator.GetMsg();
 
+                // get all players json
                 var v = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(msg.Value);
 
+                //add to player list each name
                 foreach (var i in v["players"])
                 {
                     PlayerList.Items.Add(i);
@@ -152,19 +159,31 @@ namespace ClientSide
 
         private void Join_Button_Click(object sender, RoutedEventArgs e)
         {
-            Dictionary<string, int> json = new Dictionary<string, int>();
+            //create msg
+            Dictionary<string, object> json = new Dictionary<string, object>();
+
+            // make json
             json.Add("roomId", (int)allRooms[RoomsList.SelectedItem.ToString()].Id);
+            json.Add("name", User.Username);
             string jsonString = JsonConvert.SerializeObject(json);
-            byte[] arr = Helper.SerializeMsg(jsonString, 3);
+            byte[] arr = Helper.SerializeMsg(jsonString, 4);
+
+            // send and get
             Communicator.SendMsg(arr, arr.Length);
             KeyValuePair<int, string> msg = Communicator.GetMsg();
+
+            // get from the room list the selected room and save him
             User.UserRoom = allRooms[RoomsList.SelectedItem.ToString()];
-            var v = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(msg.Value);
-            User.UserRoom.Players = new List<string>();
-            foreach (var i in v["players"])
-            {
-                User.UserRoom.Players.Add(i);
-            }
+
+            // get all the players in room
+            //var v = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(msg.Value);
+            //User.UserRoom.Players = new List<string>();
+            //foreach (var i in v["players"])
+            //{
+            //    User.UserRoom.Players.Add(i);
+            //}
+
+            // close this window and open the room data window
             RoomDataWinow dataWinow = new RoomDataWinow();
             Communicator.EndCommunicate = false;
             Close();

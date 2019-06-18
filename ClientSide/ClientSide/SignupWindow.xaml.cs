@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Newtonsoft.Json;
 
 namespace ClientSide
@@ -33,6 +21,7 @@ namespace ClientSide
         //the func close the curr window and open the main window
         private void ReturnFunc()
         {
+            //return to main window
             MainWindow mainWindow = new MainWindow();
             Communicator.EndCommunicate = false;
             this.Close();
@@ -59,9 +48,9 @@ namespace ClientSide
 
                 //make a json string 
                 string jsonString = JsonConvert.SerializeObject(json);
-
                 byte[] arr = Helper.SerializeMsg(jsonString, 2);
                
+                // send and get
                 Communicator.SendMsg(arr, arr.Length);
                 KeyValuePair<int, string> pair = Communicator.GetMsg();
 
@@ -93,7 +82,7 @@ namespace ClientSide
             //stop the default closing
             e.Cancel = true;
 
-            //return to main window
+            //end communicate
             Communicator.Finish();
 
             //close curr window

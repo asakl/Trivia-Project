@@ -16,6 +16,7 @@ namespace ClientSide
         public RoomDataWinow()
         {
             InitializeComponent();
+            // if the user is admin it's show him start game button
             if (User.Is_admin)
             {
                 StartButton.Visibility = Visibility.Visible;
@@ -25,15 +26,21 @@ namespace ClientSide
                 StartButton.Visibility = Visibility.Hidden;
             }
 
+            // show room info list
             NameLabel.Content = "the room is - " + User.UserRoom.Name.Replace("_", "__");
             InfoList.Items.Add("num of question: " + User.UserRoom.Num_of_question);
             InfoList.Items.Add("max num of users: " + User.UserRoom.MsxPlayers);
             InfoList.Items.Add("time per question: " + User.UserRoom.TimePerQuestion);
-            UsersList.Items.Add(User.Username);
+
+            // and show players list
+            User.UserRoom.Players = new List<string>();
+            User.UserRoom.Players.Add(User.Username);
             foreach (var i in User.UserRoom.Players)
             {
                 UsersList.Items.Add(i);
             }
+
+            // start clock that refresh players in room
             timer = new Thread(Tick);
             timer.Start();
         }
@@ -41,14 +48,26 @@ namespace ClientSide
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
 
+            // create json
             Dictionary<string, int> json = new Dictionary<string, int>();
             json.Add("roomId", (int)User.UserRoom.Id);
             string jsonString = JsonConvert.SerializeObject(json);
-            byte[] arr = Helper.SerializeMsg(jsonString, 13);
+            byte[] arr;
+            if (User.Is_admin)
+            {
+                arr = Helper.SerializeMsg(jsonString, 13); // close room code
+            }
+            else
+            {
+                arr = Helper.SerializeMsg(jsonString, 16); // leave room code
+            }
+            // send and get
             Communicator.SendMsg(arr, arr.Length);
             KeyValuePair<int, string> msg = Communicator.GetMsg();
 
+            User.Is_admin = false;
 
+            // return to main
             MainWindow main = new MainWindow();
             Communicator.EndCommunicate = false;
             Close();
@@ -57,23 +76,34 @@ namespace ClientSide
 
         private void Tick()
         {
+            // while the window is open
             while (true)
             {
+                // wait 5 sec
                 Thread.Sleep(5000);
+
+                // create json of get players
                 Dictionary<string, int> json = new Dictionary<string, int>();
                 json.Add("roomId", (int)User.UserRoom.Id);
                 string jsonString = JsonConvert.SerializeObject(json);
                 byte[] arr = Helper.SerializeMsg(jsonString, 3);
+
+                // send and get
                 Communicator.SendMsg(arr, arr.Length);
                 KeyValuePair<int, string> msg = Communicator.GetMsg();
 
+                // get players list
                 var v = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(msg.Value);
 
+                // for each player
                 foreach (var i in v["players"])
                 {
+                    // if this is a new player
                     if (!User.UserRoom.Players.Contains(i))
                     {
+                        // add to list in room class and to list in UI
                         User.UserRoom.Players.Add(i);
+                        // all this stuff is because we in a thread
                         Application.Current.Dispatcher.Invoke(delegate () { UsersList.Items.Add(i); });
                     }
                 }
@@ -82,6 +112,7 @@ namespace ClientSide
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
+            // close this window and open game window
             GameWindow game = new GameWindow();
             Communicator.EndCommunicate = false;
             Close();
@@ -94,11 +125,12 @@ namespace ClientSide
             //stop the default closing
             e.Cancel = true;
 
-            //return to main window
+            // if the thread is alive, kill him
             if (timer.IsAlive)
             {
                 timer.Abort();
             }
+            // end communicate
             Communicator.Finish();
 
             //close curr window

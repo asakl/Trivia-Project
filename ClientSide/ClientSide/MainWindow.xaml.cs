@@ -1,18 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Newtonsoft.Json;
 
 namespace ClientSide
@@ -27,7 +16,7 @@ namespace ClientSide
         {
             InitializeComponent();
 
-            Communicator.Init(@"C:\Users\user\Documents\magshimim\year 2\cpp class\c16 trivia\ClientSide\config.txt");
+            Communicator.Init(@"C:\Users\user\Documents\magshimim\year 2\cpp class\Trivia\ClientSide\config.txt");
 
             // try to connect
             try
@@ -78,10 +67,16 @@ namespace ClientSide
         private void Signup_Button_Click(object sender, RoutedEventArgs e)
         {
             // open signup window and close this
-            SignupWindow signupWindow = new SignupWindow();
-            Communicator.EndCommunicate = false;
-            Close();
-            signupWindow.Show();
+            try
+            {
+                SignupWindow signupWindow = new SignupWindow();
+                Communicator.EndCommunicate = false;
+                Close();
+                signupWindow.Show();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         /// <summary>
@@ -120,15 +115,19 @@ namespace ClientSide
                 }
                 else
                 {
+                    // check if the username / password is wrong or if the user is alrady connect
                     var v = JsonConvert.DeserializeObject<Dictionary<string, string>>(msg.Value);
+                    // alrady connected
                     if (v["message"].Length > 1)
                     {
+                        // print error label
                         v = JsonConvert.DeserializeObject<Dictionary<string, string>>(v["message"]);
                         ErrorLabel.Content = v["msg"];
                     }
                     // show erre label
                     else
                     {
+                        // print error label
                         ErrorLabel.Content = "username or password incorrect";
                     }
                     ErrorLabel.Visibility = Visibility.Visible;
@@ -159,10 +158,16 @@ namespace ClientSide
         private void Join_Button_Click(object sender, RoutedEventArgs e)
         {
             // open join room window and close this
-            JoinRoomsWindow joinRoomsWindow = new JoinRoomsWindow();
-            Communicator.EndCommunicate = false;
-            Close();
-            joinRoomsWindow.Show();
+            try
+            {
+                JoinRoomsWindow joinRoomsWindow = new JoinRoomsWindow();
+                Communicator.EndCommunicate = false;
+                Close();
+                joinRoomsWindow.Show();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         /// <summary>
@@ -198,10 +203,16 @@ namespace ClientSide
         private void Create_Button_Click(object sender, RoutedEventArgs e)
         {
             // open create room window and close this
-            CreateRoomWindow createRoomWindow = new CreateRoomWindow();
-            Communicator.EndCommunicate = false;
-            Close();
-            createRoomWindow.Show();
+            try
+            {
+                CreateRoomWindow createRoomWindow = new CreateRoomWindow();
+                Communicator.EndCommunicate = false;
+                Close();
+                createRoomWindow.Show();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         /// <summary>
@@ -212,11 +223,16 @@ namespace ClientSide
         private void Status_Button_Click(object sender, RoutedEventArgs e)
         {
             // open status window and close this
-            MyStatusWindow myStatusWindow = new MyStatusWindow(User.Username);
-            this.Hide();
-            Communicator.EndCommunicate = false;
-            Close();
-            myStatusWindow.Show();
+            try
+            {
+                MyStatusWindow myStatusWindow = new MyStatusWindow(User.Username);
+                Communicator.EndCommunicate = false;
+                Close();
+                myStatusWindow.Show();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         /// <summary>
@@ -226,11 +242,17 @@ namespace ClientSide
         /// <param name="e"></param>
         private void Best_Button_Click(object sender, RoutedEventArgs e)
         {
-            // open highscores window and close this
-            HighscoresWindow highscores = new HighscoresWindow();
-            Communicator.EndCommunicate = false;
-            Close();
-            highscores.Show();
+            try
+            {
+                // open highscores window and close this
+                HighscoresWindow highscores = new HighscoresWindow();
+                Communicator.EndCommunicate = false;
+                Close();
+                highscores.Show();
+            }
+            catch (Exception)
+            {
+            }
         }
         //the user click 'close'
         private void Window_Closing(object sender, CancelEventArgs e)
@@ -238,7 +260,7 @@ namespace ClientSide
             //stop the default closing
             e.Cancel = true;
 
-            //return to main window
+            //end communicate
             Communicator.Finish();
 
             //close curr window

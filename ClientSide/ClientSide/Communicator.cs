@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 
 
 namespace ClientSide
@@ -22,6 +21,7 @@ namespace ClientSide
         static private NetworkStream clientStream;
         static private bool endCommunicate = true;
 
+        // get and set
         public static bool EndCommunicate { get => endCommunicate; set => endCommunicate = value; }
 
         static public void Connect()
@@ -30,7 +30,7 @@ namespace ClientSide
             // check if there is connection
             if (!client.Connected)
             {
-                // connect
+                // connect to server
                 client = new TcpClient();
                 serverEndPoint = new IPEndPoint(IPAddress.Parse(ip), port);
                 client.Connect(serverEndPoint);
@@ -55,22 +55,23 @@ namespace ClientSide
         /// <returns> pair: the key is the msg code and the val is string of json </returns>
         static public KeyValuePair<int, string> GetMsg()
         {
-            // read
+            // read five bytes of msg, first is the code and other four is size of json
             byte[] sizeBuffer = new byte[5];
             int bytesRead = clientStream.Read(sizeBuffer, 0, 5);
 
             // get size
-            IEnumerable<byte> a = sizeBuffer.Reverse().Take(4);
-            byte[] arr = a.ToArray();
-            uint size = BitConverter.ToUInt32(arr, 0);
+            IEnumerable<byte> a = sizeBuffer.Reverse().Take(4); // reverse the arr and take four bytes of size
+            byte[] arr = a.ToArray(); // make the four bytes array again
+            uint size = BitConverter.ToUInt32(arr, 0); // convert to int
 
-            byte[] buffer = new byte[1024];
-            bytesRead = clientStream.Read(buffer, 0, 1024);
+            // read the num of bytes like the size (that only the json)
+            byte[] buffer = new byte[size * 2];
+            bytesRead = clientStream.Read(buffer, 0, (int)size * 2);
 
-            // decode
-            string str = Encoding.UTF8.GetString(buffer, 0, (int)1024);
+            // decode the json from byte to string
+            string str = Encoding.UTF8.GetString(buffer, 0, (int)size * 2);
 
-            // get json
+            // return pair: key = msgCode, val = jsonString
             return new KeyValuePair<int, string>(sizeBuffer[0], str);
         }
 
@@ -80,24 +81,32 @@ namespace ClientSide
         /// </summary>
         static public void Finish()
         {
+            // because we close a lots of windows with command Close
+            // we need to know if the window closed with command or with X button
+            // so, if endCommunicate = true: the user press on X button
             if (endCommunicate)
             {
-                // define var
+                // define json msg
                 string jsonString = "{\"username\": \"" + User.Username + "\"}";
 
-                // make the json string into byte list
+                // make the json string into byte array
                 byte[] arr = Helper.SerializeMsg(jsonString, 6);
-                Communicator.SendMsg(arr, arr.Length);
-                client.Close();
+                Communicator.SendMsg(arr, arr.Length); // send
+                client.Close(); // close socket
             }
-            endCommunicate = true;
+            endCommunicate = true; // the endCommunicate default val is true
         }
 
+        /// <summary>
+        /// the function get ip and port from text file
+        /// </summary>
+        /// <param name="path"> path to file </param>
         static public void Init(string path)
         {
             // Read the file as one string.
             string[] text = System.IO.File.ReadAllLines(path);
 
+            // get ip and port
             ip = text[0].Split('=')[1];
             port = Convert.ToInt32(text[1].Split('=')[1]);
         }

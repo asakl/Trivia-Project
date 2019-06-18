@@ -45,14 +45,20 @@ namespace ClientSide
 
         private void GetStatus()
         {
+            // create json
             Dictionary<string, string> json = new Dictionary<string, string>();
             json.Add("username", User.Username);
             string jsonString = JsonConvert.SerializeObject(json);
             byte[] arr = Helper.SerializeMsg(jsonString, 17);
+
+            // send and get 
             Communicator.SendMsg(arr, arr.Length);
             KeyValuePair<int, string> msg = Communicator.GetMsg();
+
+            // get my info
             Dictionary<string, double> data = JsonConvert.DeserializeObject<Dictionary<string, double>>(msg.Value);
 
+            // print the info
             GamesLabel.Content = GamesLabel.Content + " " + data["games"];
             RightLabel.Content = RightLabel.Content + " " + data["correct"];
             WrongLabel.Content = WrongLabel.Content + " " + data["worng"];
@@ -65,7 +71,7 @@ namespace ClientSide
             //stop the default closing
             e.Cancel = true;
 
-            //return to main window
+            //end communicate
             Communicator.Finish();
 
             //close curr window
