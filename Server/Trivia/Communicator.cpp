@@ -167,7 +167,6 @@ void Communicator::handleRequests(SOCKET client_socket)
 		if (currentHandler != nullptr)
 		{
 			this->m_clients[client_socket] = currentHandler;
-
 			res = this->m_clients[client_socket]->handleRequest(currentRequest);
 		}
 
