@@ -50,7 +50,7 @@ RequestResult RoomMemberRequestHandler::leaveRoom(Request req)
 	ErrorResponse errResp;
 
 	//Get a pointer to the room, and remove this user from it.
-	if (this->m_roomManager.getRoom(dereq.roomId)->removeUser(this->m_user.getUsername()))
+	if (this->m_roomManager->getRoom(dereq.roomId)->removeUser(this->m_user.getUsername()))
 	{
 		//If the operation succeeded, deserialize a normal message.
 		resp.status = TRIVIA_OK;
