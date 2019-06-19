@@ -13,10 +13,11 @@ typedef struct GameData
 
 class Game
 {
+public:
+	
+private:
 	vector<Question> m_questions;
 	map<LoggedUser, GameData> m_players;
 
-public:
-	
 };
 
