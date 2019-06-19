@@ -187,11 +187,6 @@ void Communicator::handleRequests(SOCKET client_socket)
 		{
 			cout << e.what() << endl;
 		}
-
-		//The current handler is no longer required.
-		delete currentHandler;
-		currentHandler = nullptr;
-
 	}
 }
 
