@@ -3,6 +3,7 @@
 #include "pch.h"
 #include "LoggedUser.h"
 
+//A struct that stores the data of a game.
 typedef struct GameData
 {
 	Question currentQuestion;
@@ -10,6 +11,7 @@ typedef struct GameData
 	unsigned int wrongAnswerCount;
 	unsigned int averageAnswerTime;
 }GameData;
+
 
 class Game
 {
