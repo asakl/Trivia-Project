@@ -44,9 +44,6 @@ RequestResult MenuRequestHandler::handleRequest(Request r)
 		case GET_ROOMS_REQUEST:
 			ret = this->getRooms(r);
 			break;
-		case GET_HISCORES_REQUEST:
-			//TODO
-			break;
 		default:
 			ErrorResponse er;
 			er.message = "Request ID invalid";
@@ -60,7 +57,7 @@ RequestResult MenuRequestHandler::handleRequest(Request r)
 
 bool MenuRequestHandler::isMenuRequest(unsigned int id)
 {
-	return JOIN_ROOM_REQUEST == id || CREATE_ROOM_REQUEST == id || GET_PLAYERS_REQUEST == id || JOIN_ROOM_REQUEST == id || CREATE_ROOM_REQUEST == id || SIGNOUT_REQUEST == id || GET_ROOMS_REQUEST == id || GET_HISCORES_REQUEST == id;
+	return JOIN_ROOM_REQUEST == id || CREATE_ROOM_REQUEST == id || GET_PLAYERS_REQUEST == id || JOIN_ROOM_REQUEST == id || CREATE_ROOM_REQUEST == id || SIGNOUT_REQUEST == id || GET_ROOMS_REQUEST == id;
 }
 
 //The function createRoom recive a request and create a room by the request configs.
@@ -134,7 +131,7 @@ RequestResult MenuRequestHandler::joinRoom(Request r)
 	 watcher = (void*)&this->m_user;
 
 	 //Try to add the user.
-	 if (!this->m_roomManager->addUserToRoom(this->m_user, req.roomId))
+	 if (!this->m_roomManager->addUserToRoom(req.name, req.roomId))
 	 {
 		 //Failed to add the user. Change status accordingly.
 		 resp.status = ERROR_RESPONSE_ID;

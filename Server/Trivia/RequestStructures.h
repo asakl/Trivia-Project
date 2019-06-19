@@ -47,6 +47,7 @@ typedef struct GetPlayersInRoomRequest
 typedef struct JoinRoomRequest
 {
 	unsigned int roomId;
+	string name;
 }JoinRoomRequest;
 
 typedef struct CreateRoomRequest
@@ -85,3 +86,13 @@ typedef struct LeaveRoomRequset
 	unsigned int roomId;
 	unsigned int status;
 }LeaveRoomRequset;
+
+typedef struct GetStatusRequest
+{
+	string username;
+}GetStatusRequest;
+
+typedef struct SubmitAnswerRequet
+{
+	unsigned int answerId;
+}SubmitAnswerRequet;

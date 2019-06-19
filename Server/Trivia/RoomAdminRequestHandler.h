@@ -23,4 +23,5 @@ private:
 	RequestResult closeRoom(Request r);
 	RequestResult startGame(Request r);
 	RequestResult getRoomState(Request r);
+
 };

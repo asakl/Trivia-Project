@@ -144,7 +144,7 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(HighscoreResponse 
 	//adds the status code to the json
 	j[STATUS] = to_string(response.status);
 	//adds the highscores to the json
-	j[HIGHSCORES] = Helper::vectorToJson(response.highscores).dump();
+	j[HIGHSCORES] = response.highscores;//Helper::vectorToJson(response.highscores).dump();
 
 	buffer = Helper::toBytes(j.dump());
 	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
@@ -221,6 +221,65 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(LeaveRoomResponse 
 	buffer = Helper::toBytes(j.dump());
 	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
 
+	return buffer;
+}
+
+vector<Byte> JsonResponsePacketSerializer::serializerResponse(GetStatusResponse response)
+{
+	vector<Byte> buffer;
+	json j;
+
+	for (auto i : response.data)
+	{
+		j[i.first] = i.second;
+	}
+
+	buffer = Helper::toBytes(j.dump());
+	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
+
+	return buffer;
+}
+
+vector<Byte> JsonResponsePacketSerializer::serializerResponse(GetGameResultsResponse response)
+{
+	vector<Byte> buffer;
+	json j, miniJson;
+
+	for (auto i : response.results)
+	{
+		miniJson[AVG_TIME] = i.avrageAnswerTime;
+		miniJson[CORRECT_ANS]= i.correctAnswersCount;
+		miniJson[WRONG_ANS]=i.wrongAnswersCount;
+		j[i.username] = miniJson.dump();
+	}
+
+	buffer = Helper::toBytes(j.dump());
+	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
+	return buffer;
+}
+
+vector<Byte> JsonResponsePacketSerializer::serializerResponse(SubmitAnswerResponse response)
+{
+	vector<Byte> buffer;
+	json j;
+	
+	j[CORRECT] = response.correctAnswerId;
+
+	buffer = Helper::toBytes(j.dump());
+	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
+	return buffer;
+}
+
+vector<Byte> JsonResponsePacketSerializer::serializerResponse(GetQuestionResponse response)
+{
+	vector<Byte> buffer;
+	json j;
+
+	j[QUESTION] = response.question;
+	j[ANSWERS] = response.answers;
+
+	buffer = Helper::toBytes(j.dump());
+	buffer = Helper::msgToProtocol(buffer, TRIVIA_OK);
 	return buffer;
 }
 

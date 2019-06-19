@@ -102,5 +102,36 @@ typedef struct LeaveRoomResponse
 	unsigned int responseLength;
 }LeaveRoomResponse;
 
+typedef struct GetStatusResponse
+{
+	unsigned int status;
+	map<string, double> data;
+	unsigned int responseLength;
+}GetStatusResponse;
 
+typedef struct GetQuestionResponse
+{
+	unsigned int status;
+	string question;
+	map<unsigned int, string> answers;
+}GetQuestionResponse;
 
+typedef struct SubmitAnswerResponse
+{
+	unsigned int status;
+	unsigned int correctAnswerId;
+}SubmitAnswerResponse;
+
+typedef struct PlayerResults
+{
+	string username;
+	unsigned int correctAnswersCount;
+	unsigned int wrongAnswersCount;
+	unsigned int avrageAnswerTime;
+}PlayerResults;
+
+typedef struct GetGameResultsResponse
+{
+	unsigned int status;
+	vector<PlayerResults> results;
+}GetGameResultsResponse;
