@@ -157,9 +157,8 @@ void Communicator::handleRequests(SOCKET client_socket)
 			currentHandler = (IRequestHandler*)this->m_handlerFactory->createLoginRequestHandler();
 			currentHandler->handleRequest(currentRequest);
 			closesocket(client_socket);
-
 			break;
-		}
+		} 
 
 		//handle the message
 		currentHandler = (IRequestHandler*)(this->sortRequest(currentRequest));
@@ -190,6 +189,10 @@ void Communicator::handleRequests(SOCKET client_socket)
 			cout << e.what() << endl;
 		}
 
+		//The current handler is no longer required.
+		delete currentHandler;
+		currentHandler = nullptr;
+
 	}
 }
 
@@ -202,8 +205,10 @@ IRequestHandler* Communicator::sortRequest(Request req)
 	IRequestHandler* handler = nullptr;	
 	bool whatRequest = false;
 
-	if (LOGIN_REQUEST_ID == req.id || (unsigned int)SIGNUP_ID == req.id)
+	if (LoginRequestHandler::isLoginRequest(req.id))
+	{
 		handler = (IRequestHandler*)this->m_handlerFactory->createLoginRequestHandler();
+	}
 
 	else if (MenuRequestHandler::isMenuRequest((unsigned int)req.id))
 	{
@@ -215,9 +220,14 @@ IRequestHandler* Communicator::sortRequest(Request req)
 		handler = (IRequestHandler*)this->m_handlerFactory->createRoomAdminRequestHandler(req);
 	}
 	
-	else if (req.id == GET_HISCORES_ID || req.id == GET_MY_DATA)
+	else if (HighscoreTable::isHighscoreRequest(req.id))
 	{
 		handler = (IRequestHandler*)this->m_handlerFactory->createHighScoreHendler();
+	}
+	
+	else if (RoomMemberRequestHandler::isRoomMemeberRequest(req.id))
+	{
+		handler = (IRequestHandler*)this->m_handlerFactory->creaeteRoomMemberRequestHandler(req);
 	}
 
 	//if the id is not matching,return nullptr.

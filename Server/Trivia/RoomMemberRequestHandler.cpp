@@ -1,5 +1,11 @@
 #include "RoomMemberRequestHandler.h"
 
+RoomMemberRequestHandler::RoomMemberRequestHandler(RoomManager* rm, Room* room)
+{
+	this->m_roomManager = rm;
+	this->m_room = room;
+}
+
 bool RoomMemberRequestHandler::isRequestRelevant(Request r)
 {
 	return RoomMemberRequestHandler::isRoomMemeberRequest(r.id);

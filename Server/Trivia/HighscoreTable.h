@@ -24,6 +24,8 @@ public:
 
 	~HighscoreTable();
 	
+	static bool isHighscoreRequest(unsigned int id) { return id == GET_HISCORES_ID || id == GET_MY_DATA;  };
+
 	// Inherited via IRequestHandler
 	virtual bool isRequestRelevant(Request) override;
 	virtual RequestResult handleRequest(Request) override;

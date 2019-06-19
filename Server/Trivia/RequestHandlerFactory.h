@@ -8,6 +8,8 @@
 #include "MenuRequestHandler.h"
 #include "LoginRequestHandler.h"
 #include "RoomAdminRequestHandler.h"
+#include "RoomMemberRequestHandler.h"
+
 
 class LoginRequestHandler;
 class MenuRequestHandler;
@@ -23,12 +25,13 @@ public:
 	LoginRequestHandler* createLoginRequestHandler();
 	MenuRequestHandler* createMenuRequestHandler();
 	RoomAdminRequestHandler* createRoomAdminRequestHandler(Request r);
+	RoomMemberRequestHandler* creaeteRoomMemberRequestHandler(Request r);
 	HighscoreTable* createHighScoreHendler();
 
 private:
 	LoginManager* m_loginManager;
 	LoginRequestHandler* globalLoginRquestHandler;
-	RoomManager* m_roomManager;
+	static RoomManager* m_roomManager;
 	HighscoreTable m_highscoreTable;
 };
 

@@ -2,18 +2,20 @@
 #pragma comment(lib, "Ws2_32.lib")
 
 #include "pch.h"
+#include "Helper.h"
+#include "IdataBase.h"
 #include "IRequestHandler.h"
 #include "RequestHandlerFactory.h"
-#include "IdataBase.h"
-#include "Helper.h"
+#include "RoomMemberRequestHandler.h"
 
-#include <WinSock2.h>
-#include <Windows.h>
+
 #include <thread>
+#include <Windows.h>
+#include <WinSock2.h>
+
+
 
 using std::thread;
-
-
 
 class Communicator
 {
@@ -26,9 +28,6 @@ public:
 
 	void bindAndListen();
 	void handleRequests(SOCKET client_socket);
-
-	
-	
 
 private:
 	map<SOCKET, IRequestHandler*> m_clients;

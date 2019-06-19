@@ -20,6 +20,7 @@ public:
 	LoginRequestHandler(IDatabase& db);
 	LoginRequestHandler(LoginManager* man);
 
+	static bool isLoginRequest(unsigned int id) { return id == LOGIN_REQUEST_ID || id == (unsigned int)SIGNUP_ID; }
 	bool isRequestRelevant(Request);
 	RequestResult handleRequest(Request);
 

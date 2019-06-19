@@ -1,8 +1,7 @@
 #include "RequestHandlerFactory.h"
 
-/*
-i dont think comments are necessary
-*/
+RoomManager* RequestHandlerFactory::m_roomManager;
+
 
 //C'tors
 RequestHandlerFactory::RequestHandlerFactory()
@@ -48,6 +47,19 @@ RoomAdminRequestHandler* RequestHandlerFactory::createRoomAdminRequestHandler(Re
 
 	return new RoomAdminRequestHandler(*this->m_roomManager->getRoom(roomId),this->m_roomManager);
 }
+
+RoomMemberRequestHandler* RequestHandlerFactory::creaeteRoomMemberRequestHandler(Request req)
+{
+	unsigned int roomId = -1;
+
+	if (LEAVE_ROOM_REQUEST == req.id)
+	{
+		roomId = JsonRequestPacketDeserializer::deserializeLeaveRoomRequset(req.buffer).roomId;
+	}
+
+	return new RoomMemberRequestHandler(this->m_roomManager, this->m_roomManager->getRoom(roomId));
+}
+
 
 HighscoreTable* RequestHandlerFactory::createHighScoreHendler()
 {
