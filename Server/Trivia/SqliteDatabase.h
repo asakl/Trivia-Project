@@ -17,7 +17,8 @@ public:
 	virtual bool open();
 	virtual void close();
 
-	virtual map<LoggedUser, int> getHighscores();
+	virtual map<string, int> getHighscores();
+	virtual map<string, double> getStatus(string name);
 	virtual bool doesUserExiste(const string);
 	virtual list<Question> getQuestions(const int);
 
@@ -25,9 +26,9 @@ public:
 	virtual void signup(string, string, string);
 	virtual LoggedUser * login(string, string);
 	virtual void logout(string, string);
+	virtual void updateUserScore(string name, int correct, int worng, double avg) override;
 
 private:
 	sqlite3 * db;
-
 };
 

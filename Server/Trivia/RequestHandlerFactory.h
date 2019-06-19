@@ -23,6 +23,7 @@ public:
 	LoginRequestHandler* createLoginRequestHandler();
 	MenuRequestHandler* createMenuRequestHandler();
 	RoomAdminRequestHandler* createRoomAdminRequestHandler(Request r);
+	HighscoreTable* createHighScoreHendler();
 
 private:
 	LoginManager* m_loginManager;

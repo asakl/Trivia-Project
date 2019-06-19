@@ -8,12 +8,23 @@ Question::Question()
 
 Question::Question(Question& other)
 {
-	this->question_id = other.question_id;
-	this->question = other.question;
-	this->correct_ans = other.correct_ans;
-	this->ans2 = other.ans2;
-	this->ans3 = other.ans3;
-	this->ans4 = other.ans4;
+	this->m_possibleAnswers = other.m_possibleAnswers;
+	this->m_question = other.m_question;
+}
+
+string Question::getQuestion()
+{
+	return this->m_question;
+}
+
+vector<string> Question::getPossibleAnswers()
+{
+	return this->m_possibleAnswers;
+}
+
+string Question::getCorrentAnswer()
+{
+	return this->m_possibleAnswers.front();
 }
 
 

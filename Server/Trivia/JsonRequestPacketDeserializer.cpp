@@ -15,6 +15,7 @@ using namespace nlohmann;
 #define QUESTION_COUNT_KEY "questionCount"
 #define ROOM_NAME_KEY "roomName"
 #define STATUS "status"
+#define ANSWER "answer"
 
 /*
 the function deserialize from vector of bytes into signup request
@@ -30,8 +31,6 @@ SignupRequest JsonRequestPacketDeserializer::deserializeSignupRequest(vector<Byt
 	//string of dict/json into json object
 	auto j = json::parse(Helper::getDictPartOfMessage(buffer));
 	
-	
-
 	//get request vals
 	ret.email = j[EMAIL_KEY].get<string>();
 	ret.username = j[USER_KEY].get<string>();
@@ -93,6 +92,7 @@ JoinRoomRequest JsonRequestPacketDeserializer::deserializeJoinRoomRequest(vector
 	j = json::parse(Helper::getDictPartOfMessage(buffer));
 
 	ret.roomId = j[ROOMID_KEY].get<int>();
+	ret.name = j[NAME].get<string>();
 
 	return ret;
 }
@@ -181,5 +181,27 @@ LogoutRequest JsonRequestPacketDeserializer::deserializeLogoutRequest(vector<Byt
 
 	ret.username = j[USER_KEY].get<string>();
 	
+	return ret;
+}
+
+GetStatusRequest JsonRequestPacketDeserializer::deserializeStatusRequest(vector<Byte> buffer)
+{
+	GetStatusRequest ret;
+
+	auto j = json::parse(Helper::getDictPartOfMessage(buffer));
+
+	ret.username = j[USER_KEY].get<string>();
+
+	return ret;
+}
+
+SubmitAnswerRequet JsonRequestPacketDeserializer::deserializeSubmitAnswerRequest(vector<Byte> buffer)
+{
+	SubmitAnswerRequet ret;
+
+	auto j = json::parse(Helper::getDictPartOfMessage(buffer));
+	
+	ret.answerId = j[ANSWER].get<unsigned int>();
+
 	return ret;
 }

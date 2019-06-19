@@ -90,7 +90,11 @@
     <ClInclude Include="RoomAdminRequestHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="RoomMemberRequestHandler.h">
+=======
+    <ClInclude Include="Game.h">
+>>>>>>> 049f5f7aa1885d64455fe4d9698d42bf0ce3e35b
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -152,7 +156,11 @@
     <ClCompile Include="RoomAdminRequestHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="RoomMemberRequestHandler.cpp">
+=======
+    <ClCompile Include="Game.cpp">
+>>>>>>> 049f5f7aa1885d64455fe4d9698d42bf0ce3e35b
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -16,7 +16,7 @@ LoginRequestHandler::LoginRequestHandler(LoginManager* man)
 //is request is relevant?
 bool LoginRequestHandler::isRequestRelevant(Request request)
 {
-	return request.id == LOGIN_REQUEST_ID || request.id == SIGNUP_REQUEST_ID;
+	return request.id == LOGIN_REQUEST_ID || request.id == SIGNUP_REQUEST_ID || request.id == GET_HISCORES_ID || request.id == GET_MY_DATA;
 }
 
 /*

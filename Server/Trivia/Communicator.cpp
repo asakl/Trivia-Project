@@ -215,6 +215,11 @@ IRequestHandler* Communicator::sortRequest(Request req)
 		handler = (IRequestHandler*)this->m_handlerFactory->createRoomAdminRequestHandler(req);
 	}
 	
+	else if (req.id == GET_HISCORES_ID || req.id == GET_MY_DATA)
+	{
+		handler = (IRequestHandler*)this->m_handlerFactory->createHighScoreHendler();
+	}
+
 	//if the id is not matching,return nullptr.
 	return handler;
 }

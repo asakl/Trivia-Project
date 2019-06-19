@@ -14,7 +14,7 @@ RequestHandlerFactory::RequestHandlerFactory(IDatabase* db)
 {
 	this->m_loginManager = new LoginManager(*db);
 	this->m_roomManager = new RoomManager();
-
+	this->m_highscoreTable = HighscoreTable(db);
 	
 	this->globalLoginRquestHandler = new LoginRequestHandler(this->m_loginManager);
 }
@@ -47,4 +47,9 @@ RoomAdminRequestHandler* RequestHandlerFactory::createRoomAdminRequestHandler(Re
 		roomId = JsonRequestPacketDeserializer::deserializeStartGameRequest(req.buffer).roomId;
 
 	return new RoomAdminRequestHandler(*this->m_roomManager->getRoom(roomId),this->m_roomManager);
+}
+
+HighscoreTable* RequestHandlerFactory::createHighScoreHendler()
+{
+	return new HighscoreTable(this->m_highscoreTable);
 }
