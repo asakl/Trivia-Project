@@ -19,6 +19,7 @@ namespace ClientSide
         public JoinRoomsWindow()
         {
             InitializeComponent();
+            Join_Button.IsEnabled = false;
             Refresh();
         }
         
@@ -111,6 +112,7 @@ namespace ClientSide
         /// <param name="e"></param>
         private void RoomsList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Join_Button.IsEnabled = true;
             // show the players in the room
             if (RoomsList.Items.Count > 0)
             {

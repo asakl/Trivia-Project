@@ -96,16 +96,18 @@ namespace ClientSide
                 var v = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(msg.Value);
 
                 // for each player
+                Application.Current.Dispatcher.Invoke(delegate () { UsersList.Items.Clear(); });
+                User.UserRoom.Players.Clear();
                 foreach (var i in v["players"])
                 {
                     // if this is a new player
-                    if (!User.UserRoom.Players.Contains(i))
-                    {
+                    //if (!User.UserRoom.Players.Contains(i))
+                    //{
                         // add to list in room class and to list in UI
                         User.UserRoom.Players.Add(i);
                         // all this stuff is because we in a thread
                         Application.Current.Dispatcher.Invoke(delegate () { UsersList.Items.Add(i); });
-                    }
+                    //}
                 }
             }
         }
