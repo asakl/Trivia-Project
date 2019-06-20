@@ -31,7 +31,7 @@ unsigned int RoomManager::createRoom(RoomData metadata,LoggedUser user)
 //Output: The operation status.
 bool RoomManager::deleteRoom(unsigned int id)
 {
-	return this->m_rooms.erase(id) == 1;
+	return RoomManager::m_rooms.erase(id) == 1;
 }
 
 //The function addUser adds the user to a room with the given id.

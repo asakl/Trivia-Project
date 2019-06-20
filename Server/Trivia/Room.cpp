@@ -52,6 +52,15 @@ const RoomData Room::getRoomData() const
 	return this->m_metadata;
 }
 
+void Room::removeAllUsers()
+{
+	//Remove all the users from the room
+	while (this->m_users.size() > 0)
+	{
+		this->m_users.pop_back();
+	}
+}
+
 vector<LoggedUser> Room::getAllUsers() const 
 {
 	return this->m_users;
