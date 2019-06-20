@@ -28,7 +28,7 @@ private:
 	static mutex loggedUsersLock;
 
 	IDatabase * m_database;
-	vector<LoggedUser> m_loggedUsers;
+	static vector<LoggedUser> m_loggedUsers;
 
 	void setDatabase(IDatabase* db);
 };

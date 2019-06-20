@@ -4,6 +4,8 @@
 mutex LoginManager::signupLock;
 mutex LoginManager::loggedUsersLock;
 
+vector<LoggedUser> LoginManager::m_loggedUsers;
+
 //setter
 void LoginManager::setDatabase(IDatabase * db)
 {

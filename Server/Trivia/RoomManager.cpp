@@ -1,6 +1,6 @@
 #include "RoomManager.h"
 
-
+map<unsigned int, Room> RoomManager::m_rooms;
 
 RoomManager::RoomManager()
 {
@@ -28,18 +28,10 @@ unsigned int RoomManager::createRoom(RoomData metadata,LoggedUser user)
 
 //the function delete room remove a room from the room map.
 //Input: id of the room to be deleted.
-//Output: operation status.
+//Output: The operation status.
 bool RoomManager::deleteRoom(unsigned int id)
 {
-	for (auto it = this->m_rooms.begin(); it != this->m_rooms.end(); it++)
-	{
-		if (it->first == id)
-		{
-			this->m_rooms.erase(it);
-			return true;
-		}
-	}
-	return false;
+	return this->m_rooms.erase(id) == 1;
 }
 
 //The function addUser adds the user to a room with the given id.
@@ -69,13 +61,16 @@ unsigned int RoomManager::getRoomState(unsigned int id)
 //Output: vector of RoomData, which contains the metadata of all the rooms in m_rooms.  
 vector<RoomData> RoomManager::getRoomsData()
 {
+	using namespace std;
+
 	//the returned vector
 	vector<RoomData> rooms;
 
 	//go over the map with iterators.
-	for (auto it = this->m_rooms.begin();it != this->m_rooms.end();it++)
+	for each (auto currentRoom in RoomManager::m_rooms)
 	{
-		rooms.push_back(it->second.getRoomData());
+		if(currentRoom.second.getRoomData().name != "")
+			rooms.push_back(currentRoom.second.getRoomData());
 	}
 
 	return rooms;

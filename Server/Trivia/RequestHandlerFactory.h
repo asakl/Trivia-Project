@@ -31,8 +31,7 @@ public:
 
 private:
 	LoginManager* m_loginManager;
-	LoginRequestHandler* globalLoginRquestHandler;
-	static RoomManager* m_roomManager;
+	RoomManager* m_roomManager;
 	HighscoreTable m_highscoreTable;
 };
 

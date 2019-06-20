@@ -18,7 +18,7 @@ public:
 
 
 private:
-	map<unsigned int, Room> m_rooms;
+	static map<unsigned int, Room> m_rooms;
 
 	int nextID;
 };

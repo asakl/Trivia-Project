@@ -1,8 +1,5 @@
 #include "RequestHandlerFactory.h"
 
-RoomManager* RequestHandlerFactory::m_roomManager;
-
-
 //C'tors
 RequestHandlerFactory::RequestHandlerFactory()
 {
@@ -14,8 +11,7 @@ RequestHandlerFactory::RequestHandlerFactory(IDatabase* db)
 	this->m_loginManager = new LoginManager(*db);
 	this->m_roomManager = new RoomManager();
 	this->m_highscoreTable = HighscoreTable(db);
-	
-	this->globalLoginRquestHandler = new LoginRequestHandler(this->m_loginManager);
+
 }
 
 //D'tor
@@ -27,7 +23,7 @@ RequestHandlerFactory::~RequestHandlerFactory()
 //create Login Request Handler
 LoginRequestHandler* RequestHandlerFactory::createLoginRequestHandler()
 {
-	return this->globalLoginRquestHandler;
+	return new LoginRequestHandler(this->m_loginManager);
 }
 
 //Create a MenuRequestHandler

@@ -28,18 +28,23 @@ bool Room::addUser(const LoggedUser user)
 
 bool Room::removeUser(const string username)
 {
+	vector<LoggedUser>::iterator it;
+
 	//go over the vector with iterator.
-	for (auto it = this->m_users.begin(); it != this->m_users.end(); it++)
+	for (it = this->m_users.begin(); it != this->m_users.end();)
 	{
-		//if username was found, delete it and exit the function.
+		
 		if (it->getUsername() == username)
 		{
-			this->m_users.erase(it);
-			return true;
+			it = this->m_users.erase(it);
+		}
+		else
+		{
+			it++;
 		}
 	}
 
-	return false;
+	return it == this->m_users.end();
 }
 
 const RoomData Room::getRoomData() const
