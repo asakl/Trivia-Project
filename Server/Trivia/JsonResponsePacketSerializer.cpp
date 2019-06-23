@@ -247,9 +247,10 @@ vector<Byte> JsonResponsePacketSerializer::serializerResponse(GetGameResultsResp
 
 	for (auto i : response.results)
 	{
-		miniJson[AVG_TIME] = i.avrageAnswerTime;
-		miniJson[CORRECT_ANS]= i.correctAnswersCount;
-		miniJson[WRONG_ANS]=i.wrongAnswersCount;
+		
+		miniJson[AVG_TIME] = i.averageAnswerTime;
+		miniJson[CORRECT_ANS]= i.correctAnswerCount;
+		miniJson[WRONG_ANS]=i.wrongAnswerCount;
 		j[i.username] = miniJson.dump();
 	}
 

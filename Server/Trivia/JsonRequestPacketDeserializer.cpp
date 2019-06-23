@@ -146,7 +146,8 @@ StartGameRequest JsonRequestPacketDeserializer::deserializeStartGameRequest(vect
 	StartGameRequest ret;
 
 	auto j = json::parse(Helper::getDictPartOfMessage(buffer));
-	ret.status = j[STATUS];
+	ret.roomId = j[ROOMID_KEY];
+	//ret.status = j[STATUS];
 
 	return ret;
 }

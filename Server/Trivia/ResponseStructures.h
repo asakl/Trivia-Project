@@ -109,12 +109,14 @@ typedef struct GetStatusResponse
 	unsigned int responseLength;
 }GetStatusResponse;
 
+/*
 typedef struct GetQuestionResponse
 {
 	unsigned int status;
 	string question;
 	map<unsigned int, string> answers;
 }GetQuestionResponse;
+*/
 
 typedef struct SubmitAnswerResponse
 {
@@ -125,10 +127,11 @@ typedef struct SubmitAnswerResponse
 typedef struct PlayerResults
 {
 	string username;
-	unsigned int correctAnswersCount;
-	unsigned int wrongAnswersCount;
-	unsigned int avrageAnswerTime;
+	unsigned int correctAnswerCount;
+	unsigned int wrongAnswerCount;
+	unsigned int averageAnswerTime;
 }PlayerResults;
+
 
 typedef struct GetGameResultsResponse
 {
@@ -143,25 +146,3 @@ typedef struct GetQuestionResponse
 	string question;
 	vector<string> answers;
 }GetQuestionResponse;
-
-
-typedef struct SubmitAnswerResponse
-{
-	unsigned int status;
-	unsigned int correctAnswerId;
-}SubmitAnswerResponse;
-
-typedef struct GetGameResultsResponse
-{
-	unsigned int status;
-	vector<PlayerResults> results;
-}GetGameResultsResponse;
-
-
-typedef struct PlayerResults
-{
-	string username;
-	unsigned int correctAnswerCount;
-	unsigned int wrongAnswerCount;
-	unsigned int averageAnswerTime;
-}PlayerResults;
