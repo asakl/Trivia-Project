@@ -96,6 +96,15 @@ namespace ClientSide
             valid &= Helper.AddToJson(json, "username", this.UsernameText.GetLineText(0));
             valid &= Helper.AddToJson(json, "password", this.PasswordText.Password);
 
+            if (valid)
+            {
+                if (json["password"].IndexOf('\'') != -1 || json["password"].IndexOf('\"') != -1)
+                {
+                    ErrorLabel.Content = "can't use ' or \", U try sqli (;...";
+                    valid = false;
+                }
+            }
+
             // valid msg?
             if (valid)
             {
