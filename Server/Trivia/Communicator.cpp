@@ -35,6 +35,8 @@ void Communicator::startThreadForNewClient()
 //C'tor
 Communicator::Communicator()
 {
+	this->db = nullptr;
+	this->m_handlerFactory = nullptr;
 	//init server socket
 	this->serverSocket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
 	

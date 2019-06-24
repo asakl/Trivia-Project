@@ -25,6 +25,11 @@ bool LoggedUser::operator==(LoggedUser other)
 	return this->m_username == other.m_username;
 }
 
+bool operator<(const LoggedUser& a, const LoggedUser& b)
+{
+	return a.m_username < b.m_username;
+}
+
 //D'tor
 LoggedUser::~LoggedUser()
 {

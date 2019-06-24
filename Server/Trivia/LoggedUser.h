@@ -15,6 +15,7 @@ public:
 	
 
 	bool operator==(LoggedUser other);
+	friend bool operator<(const LoggedUser& a, const LoggedUser& b);
 
 	~LoggedUser();
 private:
