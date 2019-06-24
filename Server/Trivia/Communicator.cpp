@@ -2,8 +2,8 @@
 
 /*
 the function make a new thread to each client
-input: none
-output: none
+Input: None
+Output: None
 */
 void Communicator::startThreadForNewClient()
 {
@@ -17,10 +17,10 @@ void Communicator::startThreadForNewClient()
 		if (client_socket == INVALID_SOCKET)
 			throw std::exception(__FUNCTION__);
 
-		//msg on server
+		
 		cout << "Client accepted. Server and client can speak" << endl;
 
-		//new thread
+		//
 		thread newThread(&Communicator::handleRequests, this, client_socket);
 		newThread.detach();
 	}

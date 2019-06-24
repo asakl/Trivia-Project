@@ -16,7 +16,7 @@ typedef struct GameData
 class Game
 {
 public:
-	
+	void removeUser(string username);
 private:
 	vector<Question> m_questions;
 	map<LoggedUser, GameData> m_players;
