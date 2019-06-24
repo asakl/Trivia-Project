@@ -64,6 +64,7 @@
     <ClCompile Include="WSAInitializer.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="GameManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Communicator.h">
@@ -145,6 +146,9 @@
       <Filter>Header</Filter>
     </ClInclude>
     <ClInclude Include="WSAInitializer.h">
+      <Filter>Header</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
       <Filter>Header</Filter>
     </ClInclude>
   </ItemGroup>

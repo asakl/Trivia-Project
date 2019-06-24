@@ -1,6 +1,5 @@
 #include "LoginRequestHandler.h"
 
-#define VALID_MSG "{'msg': 'valid login'}"
 
 
 //C'tors
@@ -56,6 +55,11 @@ RequestResult LoginRequestHandler::handleRequest(Request request, LoggedUser use
 
 	ret.newHandler = this;
 	return ret;
+}
+
+void LoginRequestHandler::removeUser(LoggedUser user)
+{
+	this->m_loginManager->logout(user);
 }
 
 RequestResult LoginRequestHandler::logout(Request r)
@@ -156,7 +160,9 @@ RequestResult LoginRequestHandler::signup(Request r)
 	//create signup result
 	resp.status = TRIVIA_OK;
 	ret.response = JsonResponsePacketSerializer::serializerResponse(resp);
-	ret.msg = to_string(resp.status) + to_string(ret.response.size());
+
+
+	ret.msg = deserialized.username;
 	return ret;
 }
 

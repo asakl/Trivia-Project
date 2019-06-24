@@ -159,8 +159,6 @@ RequestResult MenuRequestHandler::getPlayersInRoom(Request r)
 	//Get the vecotr of users
 	vector<LoggedUser> users =  this->m_roomManager->getRoom(req.roomId)->getAllUsers();
 
-	cout << this->m_roomManager->getRoom(req.roomId)->getRoomData().name << endl;
-
 	//get all the usernames from the vector of users.
 
 

@@ -2,8 +2,11 @@
 
 #include <map>
 #include "Room.h"
+#include <mutex>
+
 
 using std::map;
+using std::mutex;
 
 class RoomManager
 {
@@ -19,6 +22,8 @@ public:
 
 private:
 	static map<unsigned int, Room> m_rooms;
+	static mutex roomsMutex;
+
 
 	int nextID;
 };

@@ -126,43 +126,10 @@ void Communicator::handleRequests(SOCKET client_socket)
 	ErrorResponse err;
 	currentRequest.id = (RequestID)0;
 	LoggedUser thisUser;
-	LoginRequestHandler loginHandler;
+	LoginRequestHandler crashLoginHandler;
 
 	int ret = 0, size = 0;
 	char msg[DEFAULT_SIZE] = { 0 };
-
-	//Wait for the user to log in.
-	do
-	{
-		//recv data
-		ret = recv(client_socket, msg, DEFAULT_SIZE, 0);
-
-		//connection has lost
-		if (ret == INVALID_SOCKET || ret == SOCKET_ERROR)
-		{
-			cout << "Client " << client_socket << " closed the socket" << endl;
-			throw exception("Client closed the socket");
-		}
-
-
-		//get info of the msg
-		size = Helper::getMessageSize(msg);
-		currentRequest.buffer = Helper::toBytes(msg, size);
-		currentRequest.id = (RequestID)Helper::getMessageTypeCode(msg);
-	} while (currentRequest.id != LOGIN_REQUEST_ID);
-
-	res = loginHandler.handleRequest(currentRequest,thisUser);
-
-	thisUser = LoggedUser(res.msg);
-
-	try
-	{
-		Helper::sendData(client_socket, res.response);
-	}
-	catch (const std::exception& e)
-	{
-		cout << e.what() << endl;
-	}
 
 	//while client not signout
 	while (currentRequest.id != SIGNOUT_REQUEST)
@@ -174,6 +141,7 @@ void Communicator::handleRequests(SOCKET client_socket)
 		if (ret == INVALID_SOCKET || ret == SOCKET_ERROR)
 		{
 			cout << "Client " << client_socket << " closed the socket" << endl;
+			
 			break;
 		}
 
@@ -183,6 +151,7 @@ void Communicator::handleRequests(SOCKET client_socket)
 		size = Helper::getMessageSize(msg);
 		currentRequest.buffer = Helper::toBytes(msg, size);
 		currentRequest.id = (RequestID)Helper::getMessageTypeCode(msg);
+
 
 		if (currentRequest.id == SIGNOUT_ID)
 		{
@@ -212,6 +181,10 @@ void Communicator::handleRequests(SOCKET client_socket)
 			err.message = Helper::serializeFirstResponse(err.responseLength, ERROR_RESPONSE_ID);
 			res.newHandler = currentHandler;
 		}
+		
+		
+		
+		
 		//send data to the client
 		try
 		{

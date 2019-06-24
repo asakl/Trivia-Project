@@ -6,10 +6,18 @@ Question::Question()
 {
 }
 
+Question::Question(string question, vector<string> answers, unsigned int correctAnswer)
+{
+	this->m_question = question;
+	this->m_possibleAnswers = answers;
+	this->correctAnswer = correctAnswer;
+}
+
 Question::Question(Question& other)
 {
 	this->m_possibleAnswers = other.m_possibleAnswers;
 	this->m_question = other.m_question;
+	this->correctAnswer = other.correctAnswer;
 }
 
 string Question::getQuestion()

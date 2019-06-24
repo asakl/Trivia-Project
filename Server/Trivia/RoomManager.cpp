@@ -1,6 +1,7 @@
 #include "RoomManager.h"
 
 map<unsigned int, Room> RoomManager::m_rooms;
+mutex RoomManager::roomsMutex;
 
 RoomManager::RoomManager()
 {
@@ -18,8 +19,15 @@ unsigned int RoomManager::createRoom(RoomData metadata,LoggedUser user)
 	Room newRoom(metadata);
 	newRoom.addUser(user);
 
+
+	//Thread safety 
+	roomsMutex.lock();
+	
 	//add the room to the room map
 	this->m_rooms[this->nextID] = newRoom;
+
+	roomsMutex.unlock();
+
 
 	//return the room id, and after set the next id
 	return this->nextID++;
@@ -31,7 +39,15 @@ unsigned int RoomManager::createRoom(RoomData metadata,LoggedUser user)
 //Output: The operation status.
 bool RoomManager::deleteRoom(unsigned int id)
 {
-	return RoomManager::m_rooms.erase(id) == 1;
+	bool status = false;
+
+	this->roomsMutex.lock();
+
+	status = RoomManager::m_rooms.erase(id) == 1;
+	
+	this->roomsMutex.unlock();
+
+	return status;
 }
 
 //The function addUser adds the user to a room with the given id.
@@ -41,9 +57,13 @@ bool RoomManager::addUserToRoom(LoggedUser user, unsigned int id)
 {
 	bool succeeded = false;
 
+	this->roomsMutex.lock();
+
 	//Try to add the user
 	succeeded = this->m_rooms[id].addUser(user);
-
+	
+	this->roomsMutex.unlock();
+	
 	return succeeded;
 }
 
@@ -52,6 +72,7 @@ bool RoomManager::addUserToRoom(LoggedUser user, unsigned int id)
 //Output: The room's state.
 unsigned int RoomManager::getRoomState(unsigned int id)
 {
+	//No mutex is needed. m_rooms is not being change,only been read.
 	return this->m_rooms[id].getRoomData().isActive;
 }
 
@@ -70,6 +91,7 @@ vector<RoomData> RoomManager::getRoomsData()
 	for each (auto currentRoom in RoomManager::m_rooms)
 	{
 		if(currentRoom.second.getRoomData().name != "")
+			//No need for mutex. only reading from m_rooms, not writing.
 			rooms.push_back(currentRoom.second.getRoomData());
 	}
 
@@ -81,5 +103,6 @@ vector<RoomData> RoomManager::getRoomsData()
 //Output: A room with the id.
 Room* RoomManager::getRoom(unsigned int id)
 {
+	//No need for mutex. only reading from m_rooms, not writing.
 	return &this->m_rooms[id];
 }
