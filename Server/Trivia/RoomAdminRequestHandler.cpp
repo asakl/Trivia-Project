@@ -19,7 +19,7 @@ bool RoomAdminRequestHandler::isRequestRelevant(Request req)
 //The function RoomAdminRequestHandler::handleRequest gets a general request, and handle it by its id.
 //Input: A request.
 //Output: A request result. If the request id is not known to the handler, an error respones will be sent.
-RequestResult RoomAdminRequestHandler::handleRequest(Request req)
+RequestResult RoomAdminRequestHandler::handleRequest(Request req, LoggedUser user)
 {
 	RequestResult ret;
 	ErrorResponse errResp;

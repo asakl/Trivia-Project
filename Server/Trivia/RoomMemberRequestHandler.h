@@ -12,7 +12,7 @@ public:
 	RoomMemberRequestHandler(RoomManager* rm,Room* room);
 
 	bool isRequestRelevant(Request);
-	RequestResult handleRequest(Request);
+	RequestResult handleRequest(Request, LoggedUser user);
 	
 	static bool isRoomMemeberRequest(unsigned int);
 

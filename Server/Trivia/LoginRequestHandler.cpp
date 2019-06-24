@@ -24,7 +24,7 @@ the func handele login and signup requests
 input: the request
 output: result
 */
-RequestResult LoginRequestHandler::handleRequest(Request request)
+RequestResult LoginRequestHandler::handleRequest(Request request, LoggedUser user)
 {
 	//define var
 	RequestResult ret;
@@ -124,6 +124,9 @@ RequestResult LoginRequestHandler::login(Request r)
 			//Add the messge length to the first message.
 		}
 	}
+
+	//So the thread that handle the request will have the username.
+	ret.msg = deserialized.username;
 
 	return ret;
 }

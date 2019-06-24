@@ -19,7 +19,7 @@ public:
 	
 
 	bool isRequestRelevant(Request  r);
-	RequestResult handleRequest(Request r);
+	RequestResult handleRequest(Request r, LoggedUser user);
 
 	static bool isMenuRequest(unsigned int id);
 

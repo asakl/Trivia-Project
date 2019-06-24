@@ -11,7 +11,7 @@ class RoomAdminRequestHandler : IRequestHandler
 public:
 	RoomAdminRequestHandler(Room&,RoomManager*);
 	bool isRequestRelevant(Request r);
-	RequestResult handleRequest(Request r);
+	RequestResult handleRequest(Request r, LoggedUser user);
 
 	static bool isRoomAdminRequest(unsigned int id);
 

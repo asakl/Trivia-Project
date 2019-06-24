@@ -21,7 +21,7 @@ bool HighscoreTable::isRequestRelevant(Request request)
 	return GET_HISCORES_ID == request.id || GET_MY_DATA == request.id;
 }
 
-RequestResult HighscoreTable::handleRequest(Request request)
+RequestResult HighscoreTable::handleRequest(Request request, LoggedUser user)
 {
 	RequestResult ret;
 	if (GET_HISCORES_ID == request.id)

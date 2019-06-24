@@ -17,6 +17,7 @@ class Game
 {
 public:
 	void removeUser(string username);
+	void submitAnswer(LoggedUser,unsigned int);
 private:
 	vector<Question> m_questions;
 	map<LoggedUser, GameData> m_players;

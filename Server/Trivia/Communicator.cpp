@@ -125,11 +125,44 @@ void Communicator::handleRequests(SOCKET client_socket)
 	IRequestHandler* currentHandler = (IRequestHandler*)-1;
 	ErrorResponse err;
 	currentRequest.id = (RequestID)0;
-	int code = 0, ret = 0, size = 0;
+	LoggedUser thisUser;
+	LoginRequestHandler loginHandler;
+
+	int ret = 0, size = 0;
 	char msg[DEFAULT_SIZE] = { 0 };
 
-	
-	
+	//Wait for the user to log in.
+	do
+	{
+		//recv data
+		ret = recv(client_socket, msg, DEFAULT_SIZE, 0);
+
+		//connection has lost
+		if (ret == INVALID_SOCKET || ret == SOCKET_ERROR)
+		{
+			cout << "Client " << client_socket << " closed the socket" << endl;
+			throw exception("Client closed the socket");
+		}
+
+
+		//get info of the msg
+		size = Helper::getMessageSize(msg);
+		currentRequest.buffer = Helper::toBytes(msg, size);
+		currentRequest.id = (RequestID)Helper::getMessageTypeCode(msg);
+	} while (currentRequest.id != LOGIN_REQUEST_ID);
+
+	res = loginHandler.handleRequest(currentRequest,thisUser);
+
+	thisUser = LoggedUser(res.msg);
+
+	try
+	{
+		Helper::sendData(client_socket, res.response);
+	}
+	catch (const std::exception& e)
+	{
+		cout << e.what() << endl;
+	}
 
 	//while client not signout
 	while (currentRequest.id != SIGNOUT_REQUEST)
@@ -157,7 +190,7 @@ void Communicator::handleRequests(SOCKET client_socket)
 
 			//Logout.
 			currentHandler = (IRequestHandler*)this->m_handlerFactory->createLoginRequestHandler();
-			currentHandler->handleRequest(currentRequest);
+			currentHandler->handleRequest(currentRequest,thisUser);
 			closesocket(client_socket);
 			break;
 		} 
@@ -169,7 +202,7 @@ void Communicator::handleRequests(SOCKET client_socket)
 		if (currentHandler != nullptr)
 		{
 			this->m_clients[client_socket] = currentHandler;
-			res = this->m_clients[client_socket]->handleRequest(currentRequest);
+			res = this->m_clients[client_socket]->handleRequest(currentRequest,thisUser);
 		}
 
 		//If sort request returned nullptr, no handler is matching the given request.

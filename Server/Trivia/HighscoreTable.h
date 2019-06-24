@@ -28,7 +28,7 @@ public:
 
 	// Inherited via IRequestHandler
 	virtual bool isRequestRelevant(Request) override;
-	virtual RequestResult handleRequest(Request) override;
+	virtual RequestResult handleRequest(Request, LoggedUser user) override;
 
 private:
 	IDatabase *db;

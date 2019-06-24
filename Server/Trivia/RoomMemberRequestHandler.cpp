@@ -17,7 +17,7 @@ bool RoomMemberRequestHandler::isRoomMemeberRequest(unsigned int id)
 }
 
 
-RequestResult RoomMemberRequestHandler::handleRequest(Request req)
+RequestResult RoomMemberRequestHandler::handleRequest(Request req, LoggedUser user)
 {
 	RequestResult ret;
 	ErrorResponse errResp;

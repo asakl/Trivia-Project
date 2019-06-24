@@ -22,7 +22,7 @@ bool MenuRequestHandler::isRequestRelevant(Request r)
 
 
 //Handle the request.
-RequestResult MenuRequestHandler::handleRequest(Request r)
+RequestResult MenuRequestHandler::handleRequest(Request r, LoggedUser user)
 {
 	RequestResult ret;
 	ret.msg = "ERROR";
