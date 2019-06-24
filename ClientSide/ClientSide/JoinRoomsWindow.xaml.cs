@@ -173,23 +173,25 @@ namespace ClientSide
             // send and get
             Communicator.SendMsg(arr, arr.Length);
             KeyValuePair<int, string> msg = Communicator.GetMsg();
-
+            var v = JsonConvert.DeserializeObject<Dictionary<string, string>>(msg.Value);
             // get from the room list the selected room and save him
-            User.UserRoom = allRooms[RoomsList.SelectedItem.ToString()];
 
-            // get all the players in room
-            //var v = JsonConvert.DeserializeObject<Dictionary<string, string[]>>(msg.Value);
-            //User.UserRoom.Players = new List<string>();
-            //foreach (var i in v["players"])
-            //{
-            //    User.UserRoom.Players.Add(i);
-            //}
+            if (v["status"] != "100")
+            {
+                User.UserRoom = allRooms[RoomsList.SelectedItem.ToString()];
 
-            // close this window and open the room data window
-            RoomDataWinow dataWinow = new RoomDataWinow();
-            Communicator.EndCommunicate = false;
-            Close();
-            dataWinow.Show();
+                // close this window and open the room data window
+                RoomDataWinow dataWinow = new RoomDataWinow();
+                Communicator.EndCommunicate = false;
+                Close();
+                dataWinow.Show();
+            }
+            else
+            {
+                ErrorLabel.Content = "room is full...";
+                ErrorLabel.Visibility = Visibility.Visible;
+            }
+
         }
     }
 }

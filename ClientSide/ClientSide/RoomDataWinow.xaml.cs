@@ -98,22 +98,51 @@ namespace ClientSide
                 // for each player
                 Application.Current.Dispatcher.Invoke(delegate () { UsersList.Items.Clear(); });
                 User.UserRoom.Players.Clear();
-                foreach (var i in v["players"])
+                if (v["players"].Length == 0)
                 {
-                    // if this is a new player
-                    //if (!User.UserRoom.Players.Contains(i))
-                    //{
+                    Application.Current.Dispatcher.Invoke(delegate () { UsersList.Items.Add("the room was closed"); });
+                    Thread.Sleep(3000);
+                    Application.Current.Dispatcher.Invoke(delegate () {
+                        MainWindow main = new MainWindow();
+                        Communicator.EndCommunicate = false;
+                        Close();
+                        main.Show();
+                    });
+                }
+                else
+                {
+                    foreach (var i in v["players"])
+                    {
                         // add to list in room class and to list in UI
                         User.UserRoom.Players.Add(i);
                         // all this stuff is because we in a thread
                         Application.Current.Dispatcher.Invoke(delegate () { UsersList.Items.Add(i); });
-                    //}
+                    }
+
+                    //arr = Helper.SerializeMsg(jsonString, 15);
+                    //Thread.Sleep(100);
+                    //Communicator.SendMsg(arr, arr.Length);
+                    //msg = Communicator.GetMsg();
+                    //int j = 0;
                 }
             }
         }
 
         private void StartButton_Click(object sender, RoutedEventArgs e)
         {
+            // if the thread is alive, kill him
+            if (timer.IsAlive)
+            {
+                timer.Abort();
+            }
+            Dictionary<string, int> json = new Dictionary<string, int>();
+            json.Add("roomId", (int)User.UserRoom.Id);
+            string jsonString = JsonConvert.SerializeObject(json);
+            byte[] arr = Helper.SerializeMsg(jsonString, 14);
+
+            Communicator.SendMsg(arr, arr.Length);
+            //KeyValuePair<int, string> msg = Communicator.GetMsg();
+
             // close this window and open game window
             GameWindow game = new GameWindow();
             Communicator.EndCommunicate = false;

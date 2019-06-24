@@ -34,6 +34,7 @@ namespace ClientSide
             Ans2.Content = "ans2";
             Ans3.Content = "ans3";
             Ans4.Content = "ans4";
+            timer = new Thread(new ThreadStart(Tick));
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -51,7 +52,7 @@ namespace ClientSide
                 Thread.Sleep(1000);
                 Counter.Dispatcher.Invoke(delegate { Counter.Content = (Convert.ToInt16(Counter.Content) - 1).ToString(); });
             }
-            Answer_Clicked();
+            Counter.Dispatcher.Invoke(delegate { Answer_Clicked(); });
         }
 
         private void GetQuestion()
@@ -60,7 +61,6 @@ namespace ClientSide
 
         private void StartGame()
         {
-            timer = new Thread(new ThreadStart(Tick));
             timer.Start();
         }
 
@@ -86,10 +86,29 @@ namespace ClientSide
             Answer_Clicked();
         }
 
+        //private delegate void defaultAns();
+        private void defaultAns()
+        {
+            timer.Abort();
+            Question.Content = "asa";
+            if (quesCounter < User.UserRoom.Num_of_question)
+            {
+                quesCounter++;
+                SetQusetion();
+                StartGame();
+            }
+        }
+
         private void Answer_Clicked()
         {
             timer.Abort();
             Question.Content = "asa";
+            if (quesCounter < User.UserRoom.Num_of_question)
+            {
+                quesCounter++;
+                SetQusetion();
+                StartGame();
+            }
         }
     }
 }

@@ -76,6 +76,8 @@ namespace ClientSide
             }
             catch (Exception)
             {
+                ErrorLabel.Content = "some error in signup";
+                ErrorLabel.Visibility = Visibility.Visible;
             }
         }
 
@@ -167,6 +169,8 @@ namespace ClientSide
             }
             catch (Exception)
             {
+                ErrorLabel.Content = "some error in join";
+                ErrorLabel.Visibility = Visibility.Visible;
             }
         }
 
@@ -212,6 +216,8 @@ namespace ClientSide
             }
             catch (Exception)
             {
+                ErrorLabel.Content = "some error in create";
+                ErrorLabel.Visibility = Visibility.Visible;
             }
         }
 
@@ -232,6 +238,8 @@ namespace ClientSide
             }
             catch (Exception)
             {
+                ErrorLabel.Content = "some error in status";
+                ErrorLabel.Visibility = Visibility.Visible;
             }
         }
 
@@ -252,6 +260,8 @@ namespace ClientSide
             }
             catch (Exception)
             {
+                ErrorLabel.Content = "some error in highscores";
+                ErrorLabel.Visibility = Visibility.Visible;
             }
         }
         //the user click 'close'

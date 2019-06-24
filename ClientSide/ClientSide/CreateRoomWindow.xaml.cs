@@ -95,8 +95,8 @@ namespace ClientSide
 
             //get inputs into json
             validInput &= Helper.AddToJson(json1, "roomName", this.RoomsInput.GetLineText(0));
-            validInput &= AddToJson(json2, "questionCount", this.NumPlayersInput.GetLineText(0), ref num);
-            validInput &= AddToJson(json2, "maxUsers", this.NumQuestionsInput.GetLineText(0), ref num);
+            validInput &= AddToJson(json2, "questionCount", this.NumQuestionsInput.GetLineText(0), ref num);
+            validInput &= AddToJson(json2, "maxUsers", this.NumPlayersInput.GetLineText(0), ref num);
             validInput &= AddToJson(json2, "answerTimeout", this.TimeInput.GetLineText(0), ref num);
             validInput &= Helper.AddToJson(json1, "username", User.Username);
 
